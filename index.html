@@ -1,0 +1,624 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>La Gran Peña Criolla</title><style id="css">
+:root{--red:#b3261e;--green:#1f4d36;--terra:#c0623a;--cream:#fbf3e0;--wood:#5a3a22;--ink:#2b1a10}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font:22px/1.45 system-ui,"Segoe UI",Arial,sans-serif}
+.top{border-top:12px solid;border-image:repeating-linear-gradient(90deg,var(--red) 0 40px,var(--cream) 40px 80px,var(--green) 80px 120px,var(--terra) 120px 160px) 1;background:var(--wood);color:#fff;padding:10px 18px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.top b{font:700 1.25em Georgia,serif}
+.sc{background:var(--cream);color:var(--red);border-radius:30px;padding:4px 20px;font-weight:800;font-size:1.3em}
+main{max-width:1100px;margin:0 auto;padding:16px}
+h1,h2,h3{font-family:Georgia,serif;color:var(--red);margin:.3em 0;line-height:1.2}
+h1{font-size:2.4em}
+.card{background:#fff;border:3px solid var(--wood);border-radius:18px;padding:18px;margin:14px 0;box-shadow:0 6px 0 var(--terra)}
+.btn{font:inherit;font-weight:700;background:var(--red);color:#fff;border:0;border-radius:14px;padding:12px 22px;cursor:pointer;min-height:54px;display:inline-block;margin:4px 0}
+.btn:hover{filter:brightness(1.12)}.btn:focus-visible,input:focus,textarea:focus{outline:4px solid #e8a317}
+.btn.g{background:var(--green)}.btn.gh{background:#fff;color:var(--wood);border:2px solid var(--wood)}
+.btn.sm{font-size:16px;padding:8px 12px;min-height:0}.btn.big{font-size:1.4em;padding:18px 36px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:14px 0}
+.opts .btn{background:#fff;color:var(--ink);border:3px solid var(--green);font-size:1.1em}
+.opts .btn.x{background:#eee;color:#888;border-color:#ccc;text-decoration:line-through}
+.play{background:var(--green)}
+.pr{font-size:1.7em;color:var(--ink)}
+.inst{background:#fff6dc;border-left:6px solid var(--terra);padding:8px 14px;border-radius:8px;font-size:.85em}
+.msg{border-radius:14px;padding:12px 18px;font-weight:700;margin:12px 0;animation:pop .4s}
+.msg.ok{background:#dff3e4;color:#14532d;border:3px solid var(--green)}.msg.bad{background:#fde4e1;color:#7a1510;border:3px solid var(--red)}
+@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:none;opacity:1}}
+.vinyl{width:130px;height:130px;margin:auto;border-radius:50%;background:radial-gradient(circle,var(--cream) 0 3%,var(--red) 4% 17%,#111 18% 22%,#2a2a2a 23% 40%,#111 41% 44%,#2a2a2a 45% 70%,#111 71%);animation:sp 5s linear infinite;box-shadow:0 4px 12px #0005}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.vinyl,.msg{animation:none}}
+.cover{text-align:center}.cover img{max-width:100%;max-height:58vh;border-radius:14px;border:4px solid var(--wood)}
+.ph{border:4px dashed var(--terra);border-radius:14px;padding:40px 10px;background:#fff6dc;color:var(--terra);font-weight:700}
+.wel{font-size:1.15em;max-width:720px;margin:8px auto 18px}
+input,textarea{font:inherit;width:100%;padding:10px 12px;border:3px solid var(--wood);border-radius:10px;background:#fff;color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.tile{font:inherit;background:#fff;border:4px solid var(--wood);border-radius:16px;padding:12px;text-align:center;cursor:pointer;color:var(--ink)}
+.tile img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px}
+.tile.sel{border-color:var(--red);background:#fde4e1}.tile.ok{border-color:var(--green);background:#dff3e4}.tile.rev{border-color:#999;background:#eee}
+.tile .ph{padding:50px 4px;font-size:.7em}
+.tile:disabled{cursor:default}
+.miss{border:2px dashed var(--terra);color:var(--terra);border-radius:10px;padding:8px;font-size:.8em;font-weight:700}
+table{width:100%;border-collapse:collapse}td,th{padding:8px;border-bottom:2px solid #e6d5b8;text-align:left}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}.row{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+.f{display:block;margin:10px 0;font-size:.8em;font-weight:700}.f input,.f textarea{font-weight:400}
+.mf{border:2px dashed var(--terra);border-radius:12px;padding:10px;margin:10px 0;font-size:.8em}.mf img{max-height:140px;display:block;margin:6px 0;border-radius:8px}.mf audio{width:100%}
+.note{font-size:.8em;background:#fff6dc;padding:8px 12px;border-radius:8px}.warn{color:var(--red);font-size:.85em}
+.fact{background:#fff6dc;border:3px dashed var(--terra);border-radius:14px;padding:14px;font-size:1.1em}
+.att{font-size:.9em}
+.final{text-align:center;border:6px double var(--red)}
+select{font:inherit;width:100%;padding:8px;border:3px solid var(--wood);border-radius:10px;background:#fff;color:var(--ink)}
+.dz{position:fixed;pointer-events:none}.bg{inset:0;z-index:-1;background-repeat:no-repeat;background-position:center}.frame{inset:0;z-index:50;background-size:100% 100%;background-repeat:no-repeat}.side{top:50%;transform:translateY(-50%);max-height:80vh;object-fit:contain;z-index:1}.ctr{display:block;margin:6px auto;max-width:100%;object-fit:contain}@media(max-width:900px){.side{display:none}}
+.pv{aspect-ratio:16/9;max-height:200px;border:2px solid var(--wood);border-radius:8px;background-color:#ddd;background-repeat:no-repeat;background-position:center;margin:8px 0}
+body.arc{background:#140a24;color:#fff4d6;font-family:"Courier New",ui-monospace,monospace;font-weight:700}
+body.arc::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;background:repeating-linear-gradient(0deg,#0000 0 3px,#0002 3px 4px)}
+.arc .top{background:#0b0518;border-image:repeating-linear-gradient(90deg,var(--red) 0 20px,#ffd23f 20px 40px,var(--green) 40px 60px,var(--terra) 60px 80px) 1}
+.arc .card{background:#241238;border:4px solid #ffd23f;border-radius:0;box-shadow:6px 6px 0 var(--red);color:#fff4d6}
+.arc h1,.arc h2,.arc h3{color:#ffd23f;font-family:inherit;text-shadow:3px 3px 0 var(--red);letter-spacing:.04em}
+.arc .btn{border-radius:0;border:4px solid #ffd23f;box-shadow:0 5px 0 #000;text-transform:uppercase;letter-spacing:.05em}
+.arc .btn:active{transform:translateY(4px);box-shadow:none}.arc .btn.gh{background:#241238;color:#ffd23f}
+.arc .opts .btn{background:#140a24;color:#fff4d6;border-color:#35e0d0}.arc .opts .btn.x{background:#333;color:#999;border-color:#555}
+.arc .sc{border-radius:0;background:#000;color:#39ff6a;border:3px solid #39ff6a;text-shadow:0 0 8px #39ff6a;font-family:inherit}
+.arc .tile{background:#241238;color:#fff4d6;border-radius:0;border-color:#35e0d0}.arc .tile.sel{background:#4a1a3a;border-color:#ffd23f}.arc .tile.ok{background:#12391f;border-color:#39ff6a}.arc .tile.rev{background:#333}
+.arc .tile img,.arc .cover img{border-radius:0}.arc .msg{border-radius:0}.arc .msg.ok{background:#12391f;color:#9dffb6}.arc .msg.bad{background:#4a1414;color:#ffb4ac}
+.arc .inst,.arc .fact,.arc .note,.arc .ph{background:#140a24;color:#fff4d6;border-radius:0}.arc .pr{color:#fff4d6}.arc td,.arc th{border-color:#ffd23f55;color:#fff4d6}.arc .final{border:6px double #ffd23f}.arc .warn{color:#ffb4ac}.arc input,.arc textarea{border-radius:0}
+.hs{background:#000;border:4px solid #ffd23f;box-shadow:0 0 18px #ffd23f88;padding:14px 18px;margin:16px 0;font-family:"Courier New",ui-monospace,monospace;font-weight:700;color:#fff4d6;text-align:left}
+.hs h2{text-align:center;color:#ffd23f;font-size:2.2em;letter-spacing:.18em;margin:0;text-shadow:0 0 12px #ffd23f,3px 3px 0 var(--red)}
+.hs .sub{text-align:center;color:#35e0d0;margin:0 0 10px;letter-spacing:.1em}
+.hs .r{display:flex;align-items:baseline;gap:10px;font-size:1.3em;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px}
+.hs .r>span:first-child{min-width:2.4em}.hs .nm{overflow-wrap:anywhere}.hs .d{flex:1;border-bottom:3px dotted #fff4d655;min-width:20px}
+.hs .p1{color:#ffd23f;text-shadow:0 0 8px #ffd23f}.hs .p2{color:#35e0d0}.hs .p3{color:#ff6ad5}.hs .neg{color:#ff6b6b}
+.hs .me{background:#2d1b4d;outline:2px solid #39ff6a;animation:bl 1s steps(2) infinite}.hs .me .nm::after{content:" ◀ TÚ"}
+@keyframes bl{50%{background:#000}}@media(prefers-reduced-motion:reduce){.hs .me{animation:none}}
+.hs .att{text-align:center;color:#fff4d6;text-transform:none;letter-spacing:0;margin:10px 0 0}
+.lyr{white-space:pre-wrap;overflow-wrap:anywhere;font-size:1.45em;line-height:1.7;text-align:center;margin:12px 0;padding:14px 18px;background:#fff6dc;border-left:6px solid var(--terra);border-right:6px solid var(--terra)}
+.lyr .bl{display:inline-block;min-width:3em;border-bottom:4px solid var(--red);color:var(--red);text-align:center;line-height:1.2}
+.arc .lyr{background:#140a24;color:#fff4d6;border-color:#35e0d0}.arc .lyr .bl{border-color:#ffd23f;color:#ffd23f;text-shadow:0 0 8px #ffd23f}
+body.hsmode{background:#0b0518}
+.hsx .r{font-size:1.7em;padding:4px 10px}.hsx h2{font-size:2.8em}.hsw{max-height:56vh;overflow-y:auto;padding-right:8px;margin:8px 0}.hs .empty{text-align:center;font-size:1.5em;color:#ffd23f;padding:30px 0}
+.hsb{background:#ffd23f!important;color:#2b1a10!important;font-size:1.8em;padding:18px 40px;box-shadow:0 0 18px #ffd23f;animation:pul 1.4s ease-in-out infinite}
+@keyframes pul{50%{box-shadow:0 0 34px #ffd23f;transform:scale(1.03)}}@media(prefers-reduced-motion:reduce){.hsb{animation:none}}
+.opts.col{grid-template-columns:1fr;max-width:760px;margin:16px auto;gap:14px}
+.opts.col .btn{display:flex;align-items:center;gap:14px;width:100%;min-height:68px;text-align:left;font-size:1.2em;border-width:4px;transition:transform .12s,box-shadow .12s}
+.opts.col .btn span{flex:1;overflow-wrap:anywhere}.opts.col .btn:hover:not(:disabled){transform:translateX(6px);box-shadow:0 0 14px var(--terra)}
+.opts.col .btn:disabled{opacity:.55}.opts.col .btn.ok:disabled,.opts.col .btn.rv:disabled,.opts.col .btn.bad:disabled{opacity:1}
+.ltr{font-style:normal;flex:none;width:2.1em;height:2.1em;display:grid;place-items:center;background:var(--wood);color:#fff;border:3px solid currentColor;font-weight:800}.mk{font-size:1.4em}
+.opts.col .btn.ok,.opts.col .btn.rv{background:#dff3e4;border-color:var(--green);color:#14532d;box-shadow:0 0 16px #39ff6a;text-decoration:none}.opts.col .btn.ok{animation:pop .4s}
+.opts.col .btn.bad{background:#fde4e1;border-color:var(--red);color:#7a1510;text-decoration:none}.opts.col .btn.bad.new{animation:shk .4s}
+@keyframes shk{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.qb{background:#fff;border:4px solid var(--wood);padding:14px 18px;text-align:center;margin:12px auto;max-width:760px}
+.sab{background:#fff6dc;border:4px solid var(--terra);box-shadow:0 0 14px var(--terra);padding:12px 18px;margin:18px auto;max-width:760px}.sab h3{margin:0 0 4px;font-size:1.1em;letter-spacing:.06em}.sab p{margin:.3em 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.arc .opts.col .btn{background:#140a24;color:#fff4d6;border-color:#35e0d0}.arc .ltr{background:#ffd23f;color:#140a24}
+.arc .opts.col .btn.ok{background:#12391f;border-color:#39ff6a;color:#9dffb6}.arc .opts.col .btn.rv{background:#12391f;border-color:#ffd23f;color:#9dffb6}
+.arc .opts.col .btn.bad{background:#4a1414;border-color:#ff6b6b;color:#ffb4ac}.arc .opts.col .btn:hover:not(:disabled){box-shadow:0 0 16px #35e0d0}
+.arc .qb{background:#0b0518;border-color:#35e0d0;color:#fff4d6;text-shadow:0 0 8px #35e0d066}.arc .sab{background:#1b0f33;border-color:#ffd23f;box-shadow:0 0 16px #ffd23f99;color:#fff4d6}
+@media(prefers-reduced-motion:reduce){.opts.col .btn,.opts.col .btn.ok,.opts.col .btn.bad.new{animation:none;transition:none}}
+/* ===== DISEÑO «GRAN PEÑA CRIOLLA» (pantallas de juego) ===== */
+body.pn{background:radial-gradient(ellipse at 50% -10%,#3a1d55 0,#28133b 38%,#1a102f 100%) fixed;color:#f5efe0;font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif}
+body.pn::before{content:"";position:fixed;left:0;right:0;top:0;height:46px;z-index:5;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='46'%3E%3Cpath d='M0 4Q60 16 120 4' stroke='%23e5a93b' fill='none' stroke-width='2'/%3E%3Cpath d='M6 8L36 10L21 40Z' fill='%23d91e2a'/%3E%3Cpath d='M46 11L76 11L61 41Z' fill='%23f4f0e6'/%3E%3Cpath d='M86 10L116 8L101 38Z' fill='%23d91e2a'/%3E%3C/svg%3E") repeat-x}
+body.crt::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;background:repeating-linear-gradient(0deg,#0000 0 3px,#0002 3px 4px)}
+.cab{display:none}@media(min-width:1180px){.cab{display:block;position:fixed;bottom:0;width:150px;height:270px;opacity:.6;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 180'%3E%3Cpath d='M14 180V44L28 8H72L86 44V180Z' fill='%23100a1d' stroke='%23e5a93b' stroke-opacity='.5' stroke-width='2'/%3E%3Crect x='30' y='12' width='40' height='11' fill='%23e5a93b' opacity='.6'/%3E%3Crect x='26' y='46' width='48' height='42' rx='5' fill='%23331a55'/%3E%3Cpath d='M18 100H82L90 128H10Z' fill='%23231240'/%3E%3Ccircle cx='34' cy='112' r='5' fill='%23d91e2a'/%3E%3Ccircle cx='58' cy='113' r='4' fill='%23e5a93b'/%3E%3Ccircle cx='72' cy='113' r='4' fill='%23e5a93b'/%3E%3Crect x='30' y='135' width='40' height='45' fill='%231a0f2e'/%3E%3C/svg%3E") no-repeat bottom/contain;z-index:0}.cab.l{left:14px}.cab.r{right:14px;transform:scaleX(-1)}}
+body.pn .top{margin:44px auto 0;max-width:960px;background:transparent;border:0;border-image:none;padding:10px 14px;position:relative;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.ttl{flex:1;min-width:190px;text-align:center}.ttl b{display:block;color:#ffe14d;font:800 1.5em Georgia,serif;letter-spacing:.08em;text-shadow:0 2px 0 #7a3b00,0 0 14px #ffe14d66}.ttl small{display:block;color:#f5efe0;opacity:.85;min-height:1.3em}
+.tr{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+body.pn .btn.pb{background:linear-gradient(#f0b94a,#e5a93b);color:#2a1700}body.pn .btn.mn{background:#ffe14d;color:#2a1700}
+.menu{position:absolute;right:14px;top:100%;z-index:20;background:#121118;border:3px solid #e5a93b;border-radius:14px;padding:10px;display:grid;gap:8px;min-width:240px}
+body.pn .sc{background:#121118;color:#ffe14d;border:2px solid #e5a93b;border-radius:30px;font-size:1.2em;padding:4px 16px;font-family:inherit;text-shadow:none}
+body.pn main{max-width:920px;margin:12px auto 40px;background:linear-gradient(#17151d,#0f0e13);border:3px solid #e5a93b;border-radius:26px;padding:22px 24px;box-shadow:0 22px 60px #000c,0 0 0 8px #e5a93b22,inset 0 0 40px #0008;position:relative;z-index:3}
+body.pn main.v-hs{background:none;border:0;box-shadow:none;max-width:980px;padding:6px}
+body.pn .card{background:transparent;border:0;box-shadow:none;padding:4px 0;margin:10px 0;color:#f5efe0;border-radius:0}
+body.pn h1,body.pn h2,body.pn h3{color:#ffe14d;font-family:Georgia,serif;text-shadow:none}
+body.pn .btn{background:linear-gradient(#f0b94a,#e5a93b);color:#2a1700;border-radius:14px}body.pn .btn.gh{background:#1b1822;color:#e5a93b;border:2px solid #e5a93b}body.pn .btn.g{background:#2f7d4f;color:#fff}
+.gmh{text-align:center;margin-bottom:6px}.gb{display:inline-block;background:#e5a93b;color:#2a1700;font-weight:800;letter-spacing:.12em;padding:4px 14px;border-radius:20px;font-size:.75em}
+body.pn .gmh h2{color:#fff;font-size:2.3em;text-transform:uppercase;letter-spacing:.04em;margin:.2em 0}
+body.pn .inst{background:#1d1a25;color:#d9d2c3;border-left:5px solid #e5a93b;font-size:.78em;border-radius:8px}
+.cnt{text-align:center;color:#e5a93b;font-weight:700;letter-spacing:.08em}.tag{text-align:center;color:#ffe14d;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-top:12px}
+body.pn .qb{background:transparent;border:0;color:#fff;font:800 2em Georgia,serif;text-shadow:0 2px 0 #000;max-width:none}.aud{text-align:center;margin:12px 0}
+body.pn .btn.play{background:#1b1822;color:#ffe14d;border:3px solid #e5a93b;border-radius:40px;min-width:min(100%,420px);font-size:1.2em}
+body.pn .opts.col .btn{background:#2a2a30;color:#f5efe0;border:2px solid #4a4a55;border-radius:14px;min-height:70px;font-size:1.25em;font-weight:700;border-width:2px}
+body.pn .opts.col .btn:hover:not(:disabled){border-color:#e5a93b;box-shadow:0 0 0 3px #e5a93b44;transform:translateX(6px)}
+body.pn .ltr{border-radius:50%;background:#e5a93b;color:#2a1700;border:0}
+body.pn .opts.col .btn.ok{background:#12391f;border-color:#39ff6a;color:#b8ffcb;box-shadow:0 0 16px #39ff6a66}body.pn .opts.col .btn.rv{background:#12391f;border-color:#e5a93b;color:#b8ffcb;box-shadow:none}
+body.pn .opts.col .btn.bad{background:#4a1414;border-color:#ff6b6b;color:#ffc2bc;box-shadow:none}
+body.pn .msg{border-radius:12px}body.pn .msg.ok{background:#12391f;color:#b8ffcb;border:2px solid #39ff6a}body.pn .msg.bad{background:#4a1414;color:#ffc2bc;border:2px solid #ff6b6b}
+body.pn .sab{background:#17121f;border:2px solid #e5a93b;box-shadow:none;border-radius:14px;padding:14px 18px;margin:22px auto 6px;color:#f5efe0}
+.sh{display:flex;align-items:center;gap:10px;color:#ffe14d;font-weight:800;letter-spacing:.1em}.sab p{font-size:1.05em;line-height:1.55;margin:.5em 0 0}
+.nxw{text-align:center;margin:22px 0 4px}
+body.pn .btn.nxt{background:linear-gradient(#ffe14d,#e5a93b);color:#2a1700;font-size:1.5em;padding:18px 44px;border-radius:50px;letter-spacing:.06em;box-shadow:0 6px 0 #7a3b00,0 0 22px #e5a93b88}body.pn .btn.nxt:active{transform:translateY(4px);box-shadow:0 2px 0 #7a3b00}
+body.pn .lyr{background:#1b1822;color:#f5efe0;font-style:italic;border:0;border-left:5px solid #e5a93b;border-right:5px solid #e5a93b;border-radius:10px}body.pn .lyr .bl{color:#ffe14d;border-color:#ffe14d;font-style:normal;text-shadow:none}
+body.pn .tile{background:#1b1822;color:#f5efe0;border:3px solid #4a4a55;border-radius:16px}body.pn .tile.sel{border-color:#ffe14d;background:#2a2230}body.pn .tile.ok{border-color:#39ff6a;background:#12391f}body.pn .tile.rev{background:#2a2a30;border-color:#777}
+body.pn input,body.pn textarea{background:#1b1822;color:#fff;border:3px solid #e5a93b;border-radius:12px}
+body.pn .ph,body.pn .miss{background:#1b1822;color:#e5a93b;border-color:#e5a93b}body.pn .cover img{border:4px solid #e5a93b;border-radius:14px}
+body.pn .att,body.pn small{color:#cfc6b3}body.pn .note,body.pn .fact{background:#1d1a25;color:#f5efe0;border-radius:10px;border-color:#e5a93b}body.pn td,body.pn th{border-color:#e5a93b44;color:#f5efe0}body.pn .warn{color:#ff9d94}body.pn .final{border:0}
+/* ===== COMPACTO (una sola pantalla) ===== */
+body.pn{font-size:clamp(14px,2.4vh,17px)}body.pn::before{height:30px;background-size:auto 30px}
+body.pn .top{margin:32px auto 0;padding:4px 12px;gap:8px;max-width:900px}
+.ttl{min-width:150px}body.pn .ttl b{font-size:calc(1.3em*var(--s-title,1));letter-spacing:.06em}.ttl small{font-size:.8em;min-height:1.1em}
+body.pn .btn{padding:7px 14px;min-height:0;font-size:calc(.95em*var(--s-btn,1));margin:2px 0}body.pn .btn.sm{padding:5px 10px;font-size:calc(.8em*var(--s-btn,1))}
+body.pn .sc{font-size:1em;padding:2px 12px}
+body.pn main{max-width:900px;margin:6px auto 18px;padding:10px 16px 8px;border-width:2px;border-radius:18px}body.pn .card{margin:4px 0}
+body.pn h1{font-size:calc(2em*var(--s-title,1))}.vinyl{width:90px;height:90px}body.pn .cover img{max-height:42vh}
+.gmh{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:0 0 4px}.gb{font-size:.7em;padding:3px 10px}
+body.pn .gmh h2{font-size:calc(1.3em*var(--s-game,1));margin:0;letter-spacing:.03em}.cnt{font-size:.8em;margin:0}
+details.inst{margin:2px 0 6px;padding:3px 10px;font-size:calc(.85em*var(--s-note,1))}details.inst summary{cursor:pointer;font-weight:700;color:#e5a93b}
+.tag{font-size:.75em;margin:4px 0 0}
+body.pn .qb,body.pn h2.pr{font-size:calc(1.5em*var(--s-q,1));margin:4px 0 8px;line-height:1.25}
+body.pn .lyr{font-size:calc(1.2em*var(--s-q,1));line-height:1.45;padding:8px 14px;margin:6px 0}
+.aud{margin:4px 0}body.pn .btn.play{font-size:calc(.95em*var(--s-btn,1));padding:7px 18px;min-width:0;border-width:2px}body.pn .btn.play.sm{padding:3px 12px;font-size:calc(.8em*var(--s-btn,1))}
+body.pn .msg{padding:5px 12px;margin:6px 0;font-size:.9em}
+.opts.col.og{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:none;margin:8px 0}
+body.pn .opts.col.og .btn{flex:0 0 calc((100% - 20px)/3);width:auto;min-height:3em;padding:7px 12px;font-size:calc(1em*var(--s-opt,1));gap:10px;align-items:center}
+body.pn .opts.og.n2 .btn,body.pn .opts.og.n4 .btn{flex-basis:calc((100% - 10px)/2)}body.pn .opts.og.n1 .btn{flex-basis:60%}
+body.pn .ltr{width:1.8em;height:1.8em;font-size:.85em}
+@media(max-width:900px){body.pn .opts.col.og .btn,body.pn .opts.og.n2 .btn,body.pn .opts.og.n4 .btn{flex-basis:calc((100% - 10px)/2)}}
+@media(max-width:560px){body.pn .opts.col.og .btn,body.pn .opts.og.n2 .btn,body.pn .opts.og.n4 .btn{flex-basis:100%}}
+body.pn .sab{padding:7px 12px;margin:8px 0 2px}.sab p{font-size:calc(.95em*var(--s-note,1));margin:3px 0 0;line-height:1.4}.sh{font-size:calc(.8em*var(--s-note,1))}
+.att{font-size:.8em;margin:2px 0;text-align:center}
+.nxw{position:sticky;bottom:4px;z-index:6;margin:8px 0 0;padding:4px 0}
+body.pn .btn.nxt{font-size:calc(1.15em*var(--s-btn,1));padding:10px 34px;box-shadow:0 4px 0 #7a3b00,0 0 16px #e5a93b88}
+.m2{display:grid;grid-template-columns:240px 1fr;gap:12px;align-items:start}@media(max-width:820px){.m2{grid-template-columns:1fr}}.m2 h3{font-size:1em;margin:2px 0 4px}
+.arow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:#1b1822;border:2px solid #4a4a55;border-radius:10px;padding:3px 8px;margin:0 0 6px;font-size:.9em}
+.arow.sel{border-color:#ffe14d;background:#2a2230}.arow.ok{border-color:#39ff6a;background:#12391f}.arow.rev{background:#2a2a30;border-color:#777}
+.m2 .grid{grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:8px}
+body.pn .tile{padding:6px}.tile img,.tile .ph{width:80px;height:80px;aspect-ratio:auto;object-fit:cover;margin:0 auto;display:block}.tile .ph{padding:22px 2px;font-size:.6em}.tile h3{font-size:.95em;margin:3px 0 0}
+body.pn td,body.pn th{padding:4px 8px;font-size:.9em}.hsx .r{font-size:1.4em}.hsx h2{font-size:2.2em}.hsw{max-height:50vh}
+.fsp{background:#15131a;border:2px solid #e5a93b;border-radius:12px;padding:10px 14px;color:#f5efe0;margin:10px 0;font-size:16px}.fsp .pt{color:#ffe14d;font:800 calc(1.3em*var(--s-title,1)) Georgia,serif}.fsp .pg{color:#fff;font-weight:800;font-size:calc(1.3em*var(--s-game,1))}
+.fsp .pq{font:800 calc(1.5em*var(--s-q,1)) Georgia,serif;margin:6px 0}.fsp .po{display:flex;gap:8px;flex-wrap:wrap}.fsp .po span{background:#2a2a30;border:2px solid #4a4a55;border-radius:10px;padding:6px 10px;font-size:calc(1em*var(--s-opt,1))}
+.fsp .pn2{border:2px solid #e5a93b;border-radius:10px;padding:6px 10px;margin:8px 0;font-size:calc(.95em*var(--s-note,1))}.fsp .pb2{display:inline-block;background:#e5a93b;color:#2a1700;border-radius:30px;padding:7px 18px;font-weight:800;font-size:calc(1.15em*var(--s-btn,1))}
+.gmh{position:relative}details.inst{margin:0;padding:0;background:none;border:0;font-size:calc(.8em*var(--s-note,1))}
+details.inst summary{list-style:none;background:#1d1a25;border:1px solid #e5a93b;border-radius:14px;padding:2px 10px;color:#e5a93b;cursor:pointer;font-weight:700}
+details.inst .itx{position:absolute;right:0;top:100%;z-index:30;max-width:min(520px,92%);background:#1d1a25;border:2px solid #e5a93b;border-radius:10px;padding:8px 12px;margin-top:4px;color:#f5efe0;font-size:calc(1.15em*var(--s-note,1));line-height:1.4;box-shadow:0 8px 24px #000a}
+body.pn main{padding:8px 16px 6px}body.pn .msg{padding:3px 12px;margin:4px 0;font-size:.85em}body.pn .qb,body.pn h2.pr{margin:2px 0 4px}
+.opts.col.og{margin:6px 0}body.pn .sab{margin:6px 0 0;padding:6px 12px}.nxw{margin:4px 0 0;padding:2px 0}body.pn .btn.nxt{padding:8px 30px}
+body.pn details.inst{background:none;border:0;padding:0;border-radius:0;color:inherit}
+.m2{grid-template-columns:290px 1fr}.arow{flex-wrap:nowrap}.arow>span:not(.att){min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.arow .att{white-space:nowrap}
+.arow>b{white-space:nowrap}
+
+@media(max-width:820px){.arow{flex-wrap:wrap}.m2{grid-template-columns:minmax(0,1fr)}.m2 .grid{grid-template-columns:repeat(auto-fill,minmax(105px,1fr))}body.pn main{padding:8px 10px}}
+
+body.pn .sab{max-width:none}
+
+/* ===== PORTADA ARCADE ===== */
+body.hv::before,body.hv .cab{display:none}
+body.pn main.v-cover{background:none;border:0;box-shadow:none;padding:0;margin:0;max-width:none}
+.home{position:relative;container-type:inline-size;width:min(97vw,calc((100vh - 16px)*1.6));aspect-ratio:16/10;margin:8px auto;border:5px solid #e5a93b;border-radius:22px;overflow:hidden;background:#1a102f;box-shadow:0 0 0 5px #4a2a00,0 0 38px #e5a93b88,0 18px 50px #000c;--k:1}
+.home::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 70px #000b;border-radius:16px}
+.home .scene{position:absolute;inset:0;background-size:cover;background-position:center}.home .scene svg{width:100%;height:100%;display:block}
+.home .shade{position:absolute;inset:0;background:linear-gradient(#000a,#0000 30%,#0000 60%,#000a)}
+.tw{animation:tw 2.4s ease-in-out infinite}@keyframes tw{50%{opacity:.35}}
+.bulbs{position:absolute;top:.8cqw;left:3cqw;right:3cqw;display:flex;justify-content:space-between;z-index:4;pointer-events:none}
+.bulbs i{width:1.2cqw;height:1.2cqw;border-radius:50%;background:#ffe14d;box-shadow:0 0 1.2cqw #ffe14d;animation:tw 2.4s ease-in-out infinite}.bulbs i:nth-child(3n){background:#ff7a45;box-shadow:0 0 1.2cqw #ff7a45;animation-delay:.8s}.bulbs i:nth-child(3n+1){background:#fff;animation-delay:1.6s}
+.mq{position:absolute;top:2.6cqw;left:0;right:0;height:9cqw;display:flex;align-items:center;justify-content:space-between;gap:1cqw;padding:0 2.4cqw;z-index:5}
+.mq h1{margin:0;flex:1;text-align:center;text-transform:uppercase;font:800 calc(4.4cqw*var(--k)) Georgia,serif;letter-spacing:.05em;line-height:1.05;color:#ffe14d;text-shadow:.25cqw .25cqw 0 #7a1f10,0 0 2cqw #e5a93b99;-webkit-text-stroke:.1cqw #7a3b00}
+.hbtn{font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:7.5cqw;height:7.5cqw;border-radius:1.4cqw;border:.3cqw solid #e5a93b;background:#17121f;color:#ffe14d;font-size:max(18px,2.6cqw);cursor:pointer;line-height:1}.hbtn small{font-size:max(9px,1cqw);letter-spacing:.08em;margin-top:.3cqw;font-weight:800}.hbtn:hover{background:#2a2230}
+.hud{position:absolute;top:12.8cqw;left:2.2cqw;right:2.2cqw;display:flex;justify-content:space-between;align-items:flex-start;z-index:4;pointer-events:none}.hud .col{display:flex;flex-direction:column;gap:.7cqw;align-items:flex-end}
+.plate{background:#0d0a14e6;border:.25cqw solid #e5a93b;border-radius:1cqw;padding:.4cqw 1.4cqw;min-width:15cqw}.plate span{display:block;font-size:max(10px,1.15cqw);color:#e5a93b;font-weight:800;letter-spacing:.1em}.plate b{display:block;font:800 max(15px,2cqw) "Courier New",monospace;color:#fff;letter-spacing:.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:20cqw}
+.tag2{position:absolute;top:13cqw;left:50%;transform:translateX(-50%);width:32cqw;text-align:center;color:#f5efe0;font-size:max(11px,1.4cqw);text-shadow:0 1px 3px #000;margin:0;z-index:3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.menu-p{position:absolute;left:50%;top:21cqw;transform:translateX(-50%);width:36cqw;display:flex;flex-direction:column;gap:1.3cqw;z-index:4;padding:1.6cqw;background:#0d0a14cc;border:.3cqw solid #e5a93b;border-radius:2cqw;box-shadow:0 0 3cqw #000c,0 0 2cqw #e5a93b55}
+.menu-p button{font:800 max(16px,2.3cqw) Georgia,serif;letter-spacing:.05em;padding:1.1cqw 1cqw;border-radius:1.4cqw;border:.3cqw solid #ffe14d;cursor:pointer;color:#2a1700;text-transform:uppercase;box-shadow:0 .5cqw 0 #000a;transition:transform .12s}
+.menu-p button:hover{transform:translateY(-2px) scale(1.02)}.menu-p button:active{transform:translateY(3px);box-shadow:none}
+.menu-p .gold{background:linear-gradient(#ffe14d,#e5a93b);font-size:max(17px,2.7cqw);animation:pul 1.6s ease-in-out infinite}.menu-p .pur{background:linear-gradient(#c58cff,#7a4ad0);color:#fff;border-color:#e5c8ff}.menu-p .teal{background:linear-gradient(#5be0c8,#1f9a86);color:#04201a;border-color:#b9fff0}
+.home .menu{position:absolute;right:2cqw;top:11.5cqw;z-index:9}
+@media(max-width:760px){.home{aspect-ratio:3/5;width:97vw;--k:1.55}.mq{height:14cqw;top:3cqw}.hbtn{min-width:12cqw;height:12cqw;font-size:max(18px,5cqw)}.hbtn small{font-size:max(9px,2.2cqw)}.hud{top:19cqw}.plate{min-width:24cqw;padding:1cqw 2cqw}.plate span{font-size:max(10px,2.4cqw)}.plate b{font-size:max(15px,4.2cqw);max-width:34cqw}.tag2{display:none}.menu-p{top:50cqw;width:84cqw;padding:3cqw;gap:3cqw}.menu-p button{font-size:max(16px,5cqw);padding:2.4cqw}.menu-p .gold{font-size:max(17px,5.6cqw)}.home .menu{top:18cqw}}
+.howm{position:fixed;inset:0;background:#000b;z-index:80;display:grid;place-items:center;padding:14px}.howb{background:#15131a;border:3px solid #e5a93b;border-radius:20px;max-width:640px;width:100%;padding:18px 22px;color:#f5efe0;box-shadow:0 0 40px #e5a93b66}.howb h2{margin:0 0 8px;color:#ffe14d;font-family:Georgia,serif}.howb p{white-space:pre-wrap;line-height:1.5;font-size:1.05em;margin:.4em 0}
+.cf{position:fixed;inset:0;pointer-events:none;z-index:70;overflow:hidden}.cf i{position:absolute;top:-8vh;font-style:normal;animation:fall 1.8s ease-in forwards}@keyframes fall{to{transform:translateY(112vh) rotate(420deg);opacity:.3}}
+.fiesta{font:800 1.5em Georgia,serif;color:#ffe14d;text-align:center;margin:2px 0;text-shadow:0 0 14px #e5a93b}
+@media(prefers-reduced-motion:reduce){.cf{display:none}.tw,.bulbs i,.menu-p .gold{animation:none}}
+
+.tag2{background:#0d0a14cc;border-radius:1cqw;padding:.5cqw 1cqw;top:12.4cqw;width:30cqw}
+.menu-p .gold{font-size:max(16px,2.4cqw);letter-spacing:.03em;white-space:nowrap}
+@media(max-width:760px){.home .scene{background:linear-gradient(#1a102f,#3a1d55)}.mq{height:16cqw}.mq h1{font-size:5.8cqw}.hud{top:21cqw}.menu-p{top:46cqw}.menu-p .gold{white-space:normal;font-size:max(16px,5.2cqw)}}
+
+body.pn .home .mq h1{font-size:calc(4.4cqw*var(--k))}.tag2{width:38cqw}
+@media(max-width:760px){body.pn .home .mq h1{font-size:5.6cqw}}
+
+/* Efecto de error: gran ✖ roja central (golpe de tamaño, ~0.5 s fija, desvanecido). No bloquea clics. */
+.xfx{position:fixed;inset:0;display:grid;place-items:center;pointer-events:none;z-index:90;overflow:hidden}
+.xfx span{font:900 min(38vmin,240px)/1 Arial,Helvetica,sans-serif;color:#e0201a;text-shadow:0 0 0 #fff,0 .02em 0 #7a1510,0 0 .12em #0009;opacity:0;animation:xin 1s ease-out 1 forwards}
+@keyframes xin{0%{transform:scale(1.7);opacity:0}14%{transform:scale(1);opacity:1}64%{transform:scale(1);opacity:1}100%{transform:scale(1);opacity:0}}
+@media(prefers-reduced-motion:reduce){.xfx span{animation-name:xinr}@keyframes xinr{0%{opacity:0}14%{opacity:1}64%{opacity:1}100%{opacity:0}}}
+.hs .dt{font-size:.55em;color:#35e0d0;letter-spacing:0;white-space:nowrap;text-transform:none}.row audio{flex:1;min-width:180px}
+
+/* ===== TIPOGRAFÍA GLOBAL (solo actúa si se elige algo en el Editor) ===== */
+body.pn.tyf-t h1,body.pn.tyf-t h2:not(.pr),body.pn.tyf-t h3,body.pn.tyf-t .ttl b,body.pn.tyf-t .mq h1,body.pn.tyf-t .fiesta,body.pn.tyf-t .hs h2{font-family:var(--ff-t)}
+body.pn.tyf-q h2.pr,body.pn.tyf-q .qb,body.pn.tyf-q .lyr,body.pn.tyf-q .opts .btn,body.pn.tyf-q .tile h3,body.pn.tyf-q input,body.pn.tyf-q textarea{font-family:var(--ff-q)}
+body.pn.tyf-b .btn,body.pn.tyf-b .hbtn,body.pn.tyf-b .menu-p button,body.pn.tyf-b .sc,body.pn.tyf-b .cnt,body.pn.tyf-b .tag,body.pn.tyf-b .tag2,body.pn.tyf-b .gb,body.pn.tyf-b .sab p,body.pn.tyf-b .sh,body.pn.tyf-b .itx,body.pn.tyf-b details.inst summary,body.pn.tyf-b .att,body.pn.tyf-b .ttl small,body.pn.tyf-b .howb p,body.pn.tyf-b .note,body.pn.tyf-b .fact,body.pn.tyf-b .miss{font-family:var(--ff-b)}
+body.pn.tyl-t h1,body.pn.tyl-t h2:not(.pr),body.pn.tyl-t h3,body.pn.tyl-t .ttl b,body.pn.tyl-t .mq h1,body.pn.tyl-t .fiesta,body.pn.tyl-t .hs h2{line-height:var(--lh-t)}
+body.pn.tyl-q h2.pr,body.pn.tyl-q .qb,body.pn.tyl-q .lyr,body.pn.tyl-q .opts .btn,body.pn.tyl-q .tile h3{line-height:var(--lh-q)}
+body.pn.tyl-b .btn,body.pn.tyl-b .tag2,body.pn.tyl-b .sab p,body.pn.tyl-b .itx,body.pn.tyl-b .att,body.pn.tyl-b .note,body.pn.tyl-b .fact,body.pn.tyl-b .howb p{line-height:var(--lh-b)}
+body.pn .home .mq h1{font-size:calc(4.4cqw*var(--k)*var(--ty-t,1))}
+@media(max-width:760px){body.pn .home .mq h1{font-size:calc(5.6cqw*var(--ty-t,1))}}
+/* vista previa en el Editor */
+.tyg{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;align-items:start}
+.typw{position:sticky;top:0;z-index:8;max-height:34vh;overflow:auto;background:var(--cream);padding:4px 0;border-radius:12px}
+.typv{background:#15131a;border:2px solid #e5a93b;border-radius:12px;padding:10px 14px;color:#f5efe0;font-size:16px;overflow-wrap:anywhere}
+.typv small{display:block;color:#e5a93b;font:700 11px system-ui,sans-serif;letter-spacing:.1em;margin-bottom:4px}
+.typv .pvt{font-family:var(--ff-t);font-size:calc(1.7em*var(--ty-t,1));line-height:var(--lh-t);color:#ffe14d;font-weight:800;margin:2px 0}
+.typv .pvq{font-family:var(--ff-q);font-size:calc(1.3em*var(--ty-q,1));line-height:var(--lh-q);font-weight:800;margin:6px 0}
+.typv .pva{display:flex;gap:10px;align-items:center;font-family:var(--ff-q);font-size:calc(1.05em*var(--ty-q,1));line-height:var(--lh-q);background:#2a2a30;border:2px solid #4a4a55;border-radius:12px;padding:6px 12px;margin:6px 0}
+.typv .pva i{font-style:normal;background:#e5a93b;color:#2a1700;border-radius:50%;width:1.7em;height:1.7em;display:grid;place-items:center;flex:none;font-weight:800}
+.typv .pvb{display:inline-block;font-family:var(--ff-b);font-size:calc(1em*var(--ty-b,1));line-height:var(--lh-b);background:#e5a93b;color:#2a1700;border-radius:30px;padding:6px 16px;font-weight:800;margin:6px 0}
+.typv .pvs{font-family:var(--ff-b);font-size:calc(.9em*var(--ty-b,1));line-height:var(--lh-b);color:#d9d2c3;border-left:4px solid #e5a93b;padding-left:10px;margin-top:4px}
+@media(min-width:900px){.tyg{grid-template-columns:380px minmax(0,1fr)}.typw{max-height:none;top:8px}}
+
+/* ===== TEXTOS DEL JUEGO ===== */
+.tx{display:block}
+body.pn.tyf-b [data-tg]{font-family:var(--ff-b)}
+body.pn.tyl-b [data-tg]{line-height:var(--lh-b)}
+.txg{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;align-items:start}
+.txl{display:none}.txm{display:block}
+.txl h4{margin:12px 0 4px;color:var(--red);font-size:.8em;letter-spacing:.04em}
+.txl .btn{display:block;width:100%;text-align:left;font-size:15px;padding:6px 10px;margin:2px 0;line-height:1.25}
+.txg2{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.pvbox{background:#15131a;border:2px solid #e5a93b;border-radius:12px;padding:12px 14px;color:#f5efe0;font-size:18px;line-height:1.3;overflow-wrap:anywhere}
+.pvx{display:block;white-space:pre-wrap}
+.typv .msg{font-size:15px;margin:2px 0}
+@media(min-width:900px){.txg{grid-template-columns:290px minmax(0,1fr)}.txl{display:block;max-height:80vh;overflow:auto;padding-right:4px}.txm{display:none}}
+</style></head><body><div id="root"></div><script>window.PLAY=true;</script><script id="app">
+const PLAY=!!window.PLAY,$=s=>document.querySelector(s),R=$('#root');
+let MUTEM=(()=>{try{return !!localStorage.muteM}catch(e){return false}})(),MUTEF=(()=>{try{return !!localStorage.muteF}catch(e){return false}})(),FXL={},PLLAST=-1,MNU=false,SNDOK=false,BG=null,BGK=null,SCRK='',FXA=null,DQ=false,DF=false,HOWO=false,TOP=null,LAST=null,FLASH='',C,G,view,tab='i',DSNAP,URLS={},AU=null,DBp;
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const norm=s=>String(s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');
+const shuf=a=>{a=[...a];for(let i=a.length;i>1;i--){const j=Math.random()*i|0;[a[i-1],a[j]]=[a[j],a[i-1]]}return a};
+const pget=(o,p)=>p.split('.').reduce((a,k)=>a?.[k],o),pset=(o,p,v)=>{const k=p.split('.'),l=k.pop();pget(o,k.join('.')||'')&&0;k.reduce((a,x)=>a[x],o)[l]=v};
+const U=m=>m&&URLS[m.id]||'';
+const DEF=()=>({theme:{red:'#b3261e',green:'#1f4d36',terra:'#c0623a',cream:'#fbf3e0'},
+texts:{title:'La Gran Peña Criolla',welcome:'¡Bienvenidas y bienvenidos a nuestra peña! Prepárense para cantar, recordar y pasarla muy bien.',start:'COMENZAR A JUGAR',group:'Escribe tu nombre',final:'¡Felicitaciones, {jugador}! Obtuviste {puntaje} puntos de un máximo de {max}. ¡Que viva la música criolla!',how:'1. Pulsa COMENZAR A JUGAR y escribe tu nombre.\n2. Son 4 juegos: Trivia, ¿Quién canta?, Género musical y Completa la canción.\n3. Cada acierto suma 100 puntos y cada error resta 50.\n4. Las pistas cuestan 50 puntos.\n5. Al final verás tu puntaje y la tabla HIGH SCORES.'},
+names:['Trivia criolla','¿Quién canta?','Reconoce el género musical','Completa la canción'],
+inst:['Lean la pregunta y las alternativas. El grupo responde en voz alta y usted pulsa la alternativa elegida. Hay 2 intentos.','Escuchen los audios (puede repetirlos). Elija un audio y una ficha de cantante para unirlos. Cada audio tiene 2 intentos.','Pulse ▶ para escuchar. El grupo dice el género y usted lo marca. Si piden una pista se descuentan 50 puntos y queda un solo intento.','Lean el fragmento. El grupo dice la palabra que falta y usted la escribe. Con pista (−50) aparecen alternativas y queda un solo intento.'],
+cover:null,snd:{music:null,playlist:[],order:'seq',fxOk:[],fxBad:[],vfxOk:true,vfxBad:true,musicScreens:{home:true},musicOn:true,musicVol:40,fxVol:70,fx:{ok:null,bad:null,hint:null,game:null,record:null,final:null}},online:{url:''},msgs:{words:['¡WOW!','¡MUY BIEN!','¡EXCELENTE!','¡BRAVO!'],okQ:'{palabra} +100 puntos',okM:'{palabra} El Audio {n} es {nombre}. +100 puntos',badQ1:'Todavía no. −50 puntos. Les queda 1 intento.',badQ2:'No era. −50 puntos. La respuesta correcta era: {respuesta}',badM1:'Esa pareja no es. −50 puntos. Les queda 1 intento con ese audio.',badM2:'Se acabaron los intentos. El Audio {n} era {nombre}. −50 puntos',hint:'Pista usada: −50 puntos. Ahora queda un solo intento.'},tx:{},typo:{t:{f:'def',fb:'serif',sz:100,lh:null,file:null},q:{f:'def',fb:'sans',sz:100,lh:null,file:null},b:{f:'def',fb:'sans',sz:100,lh:null,file:null}},design:{arcade:false,pieces:[]},facts:['Ejemplo editable: escribe aquí un dato cultural breve que hayas verificado.'],memes:[],
+g1:[{q:'Ejemplo: ¿Qué instrumento de percusión es típico de la música criolla?',ans:'El cajón',alts:['El bombo','El timbal']},{q:'Ejemplo: ¿Qué baile se considera símbolo del Perú?',ans:'La marinera',alts:['El tango','La salsa']}],
+g2:[{name:'',photo:null,audio:null},{name:'',photo:null,audio:null},{name:'',photo:null,audio:null}],
+g3:[{q:'',ans:'Vals peruano',alts:['Marinera','Festejo'],audio:null,hint:null}],
+g4:[{frag:'Ejemplo: Lima es la capital del Perú',ans:'capital',alts:['ciudad','plaza']}]});
+const fixC=x=>{const c=Object.assign(DEF(),x),t=c.texts;if(['¿Cómo se llama el grupo?','Escribe tu nombre criollo'].includes(t.group))t.group=DEF().texts.group;if(/El grupo “\{grupo\}”/.test(t.final))t.final=DEF().texts.final;if(t.start=='¡Empezar la jarana!')t.start=DEF().texts.start;if(t.how==null)t.how=DEF().texts.how;c.snd=Object.assign(DEF().snd,c.snd||{});c.snd.fx=Object.assign(DEF().snd.fx,c.snd.fx||{});if(!c.snd.musicScreens)c.snd.musicScreens={home:true};const sn=c.snd;sn.playlist=sn.playlist||[];sn.fxOk=sn.fxOk||[];sn.fxBad=sn.fxBad||[];if(sn.music){sn.playlist.push(sn.music);sn.music=null}if(sn.fx.ok){sn.fxOk.push(sn.fx.ok);sn.fx.ok=null}if(sn.fx.bad){sn.fxBad.push(sn.fx.bad);sn.fx.bad=null}c.typo=TY(x&&x.typo);c.msgs=Object.assign(DEF().msgs,(x&&x.msgs)||{});c.tx=(x&&x.tx&&typeof x.tx=='object')?x.tx:{};return c};
+const NEW={g1:()=>({tag:'',q:'',ans:'',alts:[],note:''}),g2:()=>({name:'',photo:null,audio:null}),g3:()=>({q:'',ans:'',alts:[],audio:null,hint:null}),g4:()=>({frag:'',ans:'',alts:[]}),memes:()=>({text:'',img:null})};
+const mediaList=c=>{const L=[],a=m=>m&&L.push(m);a(c.cover);(c.design?.pieces||[]).forEach(p=>a(p.img));if(c.snd){a(c.snd.music);Object.values(c.snd.fx||{}).forEach(a);['playlist','fxOk','fxBad'].forEach(k=>(c.snd[k]||[]).forEach(a))}c.memes.forEach(x=>a(x.img));c.g2.forEach(x=>{a(x.photo);a(x.audio)});c.g3.forEach(x=>{a(x.audio);a(x.hint)});['t','q','b'].forEach(k=>a(c.typo&&c.typo[k]&&c.typo[k].file));return L};
+/* ---- almacenamiento (IndexedDB para archivos, localStorage para la configuración) ---- */
+const idb=()=>DBp||(DBp=new Promise((ok,no)=>{const r=indexedDB.open('pena',1);r.onupgradeneeded=()=>r.result.createObjectStore('m');r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)}));
+const tx=async(m,f)=>{const d=await idb();return new Promise((ok,no)=>{const t=d.transaction('m',m),s=f(t.objectStore('m'));t.oncomplete=()=>ok(s.result);t.onerror=()=>no(t.error)})};
+const loadBlobs=async()=>{URLS={};for(const m of mediaList(C)){const b=await tx('readonly',s=>s.get(m.id));if(b)URLS[m.id]=URL.createObjectURL(b)}};
+const save=()=>{try{localStorage.cfg=JSON.stringify(C)}catch(e){alert('No se pudo guardar la configuración: '+e.message)}};
+const rmM=async m=>{if(!m)return;await tx('readwrite',s=>s.delete(m.id));URL.revokeObjectURL(URLS[m.id]);delete URLS[m.id]};
+const shrink=async f=>{const b=await createImageBitmap(f),k=Math.min(1,1400/Math.max(b.width,b.height));if(k==1&&/png|webp|gif/.test(f.type))return f;const c=document.createElement('canvas');c.width=b.width*k;c.height=b.height*k;const x=c.getContext('2d');const png=f.type=='image/png';if(!png){x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height)}x.drawImage(b,0,0,c.width,c.height);return new Promise(r=>c.toBlob(r,png?'image/png':'image/jpeg',.85))};
+async function up(p,k,f){if(!f)return;try{let b=f,name=f.name;if(k=='img'){b=await shrink(f);name=f.name.replace(/\.\w+$/,'')+({'image/png':'.png','image/webp':'.webp','image/gif':'.gif'}[b.type]||'.jpg')}
+const id='m'+Date.now().toString(36)+(Math.random()*1e4|0);await tx('readwrite',s=>s.put(b,id));await rmM(pget(C,p));URLS[id]=URL.createObjectURL(b);pset(C,p,{id,name,type:b.type||f.type});FLASH='✅ Archivo guardado: '+name;save();render()}catch(e){alert('No se pudo cargar el archivo: '+e.message)}}
+/* ---- música, efectos y celebraciones ---- */
+const SN=()=>Object.assign({musicOn:true,musicVol:40,fxVol:70},C.snd||{});
+const musicKey=()=>view=='cover'?'home':view=='group'?'group':view=='game'?'g'+G.g:view=='t'?'trans':view=='final'?'final':view=='hs'?'hs':null;
+const PL=()=>((C.snd&&C.snd.playlist)||[]).filter(m=>U(m));
+function nextTrack(){const L=PL();if(!L.length)return null;let i;if(SN().order=='rand'){i=Math.random()*L.length|0;if(L.length>1)while(i==PLLAST)i=Math.random()*L.length|0}else i=(PLLAST+1)%L.length;PLLAST=i;return L[i]}
+function bgStop(){if(BG){BG.onended=BG.onerror=null;BG.pause();BG=null}}
+function bgApply(){const s=SN(),k=view=='admin'?null:musicKey(),on=!!(k&&s.musicOn&&!MUTEM&&(s.musicScreens||{})[k]&&PL().length);
+if(BG&&(BGK!==k||!on))bgStop();   /* se corta al instante al cambiar de pantalla */
+BGK=k;if(!on||!SNDOK)return;
+if(!BG){if(DQ)return;const m=nextTrack();if(!m)return;const a=new Audio(U(m));a.onended=()=>{if(BG===a){BG=null;bgApply()}};a.onerror=()=>{if(BG===a)BG=null};BG=a}
+BG.volume=Math.min(1,s.musicVol/100*(DQ?.12:DF?.35:1));if(BG.paused)BG.play().catch(()=>{})}
+/* Cadena de efectos: cada biblioteca (ok / bad) avanza en el orden de la lista y vuelve al primero. El contador (FXL) vive solo en memoria: se reinicia al recargar. */
+function pick(L,k){L=(L||[]).filter(m=>U(m));if(!L.length)return null;const i=((FXL[k]==null?-1:FXL[k])+1)%L.length;FXL[k]=i;return L[i]}
+function auStop(){if(AU){AU.onplaying=AU.onended=AU.onpause=null;AU.pause();AU=null}DQ=false}
+function fxStop(){if(FXA){const a=FXA;FXA=null;a.onended=a.onpause=a.onerror=null;a.pause()}DF=false}
+function fx(k){const s=SN();if(MUTEF||!SNDOK)return;const f=(C.snd&&C.snd.fx)||{},m=k=='ok'?pick(C.snd.fxOk,k):k=='bad'?pick(C.snd.fxBad,k):f[k],u=U(m);if(!u)return;auStop();if(FXA)FXA.pause();const a=new Audio(u);FXA=a;a.volume=Math.min(1,s.fxVol/100);DF=true;bgApply();
+const done=()=>{if(FXA===a){DF=false;bgApply()}};a.onended=a.onpause=a.onerror=done;a.play().catch(done)}
+const WOW=()=>{const L=((C.msgs&&C.msgs.words)||[]).filter(Boolean);return L.length?L[Math.random()*L.length|0]:''};
+const confetti=n=>{let h='';for(let i=0;i<(n>1?36:16);i++)h+=`<i style="left:${Math.random()*100}%;font-size:${14+Math.random()*18|0}px;animation-delay:${(Math.random()*.5).toFixed(2)}s;animation-duration:${(1.2+Math.random()).toFixed(2)}s">${['⭐','✨','🎉','🎶','🌟'][i%5]}</i>`;return `<div class=cf aria-hidden=true>${h}</div>`};
+/* Efecto visual de error: ✖ roja que vive fuera de #root, para que un nuevo render no la corte. */
+const errX=()=>{const d=document.createElement('div');d.className='xfx';d.setAttribute('aria-hidden','true');d.innerHTML='<span>✖</span>';document.body.appendChild(d);const rm=()=>d.remove();d.firstChild.addEventListener('animationend',rm);setTimeout(rm,1500)};
+const bs=()=>{const a=[...RES(),...(TOP||[])].map(r=>Number(r.puntaje)).filter(isFinite);return a.length?Math.max(...a):null};
+const menuHTML=()=>`<div class=menu><button class=btn data-act=how>❓ Cómo jugar</button>${['cover','final'].includes(view)?'<button class=btn data-act=hs>🏆 Récords</button>':''}<button class=btn data-act=reset>🎮 Nueva partida</button>${!PLAY?'<button class="btn gh" data-act=adm>← Administración</button>':''}<button class="btn gh" data-act=menu>Cerrar</button></div>`;
+const howHTML=()=>`<div class=howm><div class=howb><h2>❓ CÓMO JUGAR</h2><p>${tw('how',esc(C.texts.how))}</p><div class=nxw><button class="btn nxt" data-act=howc>ENTENDIDO</button></div></div></div>`;
+function scene(){const nw=typeof matchMedia=='function'&&matchMedia('(max-width:760px)').matches;
+const fr=(x,y,w,h)=>`<g><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="3" fill="#e5a93b"/><rect x="${x+5}" y="${y+5}" width="${w-10}" height="${h-10}" fill="#3a2a1a"/><circle cx="${x+w/2}" cy="${y+h*.42}" r="${w*.17}" fill="#b08a5a"/><path d="M${x+w*.2} ${y+h-5}Q${x+w/2} ${y+h*.52} ${x+w*.8} ${y+h-5}Z" fill="#b08a5a"/></g>`;
+const gt=(x,y,k,r)=>`<g transform="translate(${x} ${y}) rotate(${r}) scale(${k})"><rect x="-5" y="-122" width="10" height="92" fill="#3a1d0c"/><rect x="-8" y="-138" width="16" height="20" rx="3" fill="#2a1408"/><ellipse cx="0" cy="-22" rx="27" ry="31" fill="url(#wd)" stroke="#5a2f10" stroke-width="3"/><ellipse cx="0" cy="24" rx="36" ry="40" fill="url(#wd)" stroke="#5a2f10" stroke-width="3"/><circle cx="0" cy="10" r="11" fill="#1a0c05"/><rect x="-14" y="42" width="28" height="5" fill="#3a1d0c"/></g>`;
+const cj=(x,y,w,h)=>`<g><rect x="${x}" y="${y}" width="${w}" height="${h}" fill="url(#wd)" stroke="#5a2f10" stroke-width="3"/><circle cx="${x+w/2}" cy="${y+h*.5}" r="${w*.2}" fill="#1a0c05"/><rect x="${x}" y="${y+h-6}" width="${w}" height="6" fill="#3a1d0c"/></g>`;
+const st=(x,y,k,d)=>`<path class=tw style="animation-delay:${d}s" transform="translate(${x} ${y}) scale(${k})" d="M0-8L2-2L8 0L2 2L0 8L-2 2L-8 0L-2-2Z" fill="#ffe14d"/>`;
+const y=x=>140+16*Math.sin(x/960*Math.PI*4);let band='',flags='';for(let x=0;x<=960;x+=16)band+=(x?'L':'M')+x+' '+y(x).toFixed(1);
+for(let x=30;x<940;x+=46){const yy=y(x);flags+=`<path d="M${x-14} ${yy.toFixed(1)}L${x+14} ${(yy+2).toFixed(1)}L${x} ${(yy+30).toFixed(1)}Z" fill="${(x/46|0)%2?'#f4f0e6':'#d91e2a'}"/>`}
+return `<svg viewBox="0 0 960 600" preserveAspectRatio="${nw?'xMidYMax meet':'xMidYMid slice'}" aria-hidden="true"><defs><linearGradient id="wl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a102f"/><stop offset="1" stop-color="#3a1d55"/></linearGradient><linearGradient id="fl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a3622"/><stop offset="1" stop-color="#2a170d"/></linearGradient><linearGradient id="wd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d89a52"/><stop offset="1" stop-color="#8a5226"/></linearGradient><radialGradient id="sp" cx="50%" cy="48%" r="55%"><stop offset="0" stop-color="#e5a93b" stop-opacity=".3"/><stop offset="1" stop-color="#e5a93b" stop-opacity="0"/></radialGradient></defs>
+<rect width="960" height="600" fill="url(#wl)"/><rect width="960" height="600" fill="url(#sp)"/><rect y="452" width="960" height="148" fill="url(#fl)"/><path d="M0 482H960M0 516H960M0 556H960" stroke="#0006" stroke-width="3"/>
+<path d="${band}" stroke="#e5a93b" stroke-width="3" fill="none"/>${flags}
+${fr(24,196,70,90)}${fr(104,186,60,76)}${fr(174,200,62,78)}${fr(690,214,70,88)}${fr(772,204,60,76)}
+${gt(266,380,.78,-8)}
+<ellipse cx="150" cy="470" rx="95" ry="10" fill="#0007"/><ellipse cx="750" cy="474" rx="130" ry="11" fill="#0007"/><ellipse cx="918" cy="470" rx="45" ry="8" fill="#0007"/>
+${cj(108,410,76,60)}
+<g fill="#120a1f" stroke="#e5a93b" stroke-opacity=".7" stroke-width="1.5"><circle cx="146" cy="322" r="20"/><ellipse cx="146" cy="306" rx="36" ry="7"/><path d="M124 306Q146 280 168 306Z"/><path d="M116 346Q146 332 178 346L186 412H112Z"/><path d="M112 410L98 466L128 468L150 430Z"/><path d="M172 408L196 424L192 466L168 466Z"/></g>
+${gt(152,408,.82,66)}
+<g transform="translate(-30 0)"><circle cx="760" cy="326" r="19" fill="#1a0c05"/><circle cx="762" cy="330" r="15" fill="#d9a07a"/><path d="M742 352Q762 342 782 352L786 384H738Z" fill="#f4f0e6"/><path d="M738 380Q762 372 786 380L836 478Q762 498 690 478Z" fill="#d91e2a"/><path d="M696 470Q762 492 830 470" stroke="#f4f0e6" stroke-width="7" fill="none"/><path d="M780 358Q806 342 814 312" stroke="#d9a07a" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M814 312Q836 292 850 306Q834 324 818 320Z" fill="#fff"/></g>
+<g transform="translate(-14 0)"><ellipse cx="880" cy="320" rx="30" ry="6" fill="#d9b36a"/><path d="M864 320Q880 296 896 320Z" fill="#c99a4a"/><circle cx="880" cy="334" r="15" fill="#d9a07a"/><path d="M858 354Q880 344 902 354L906 432H854Z" fill="#1c1c24"/><path d="M870 350L880 372L890 350Z" fill="#f4f0e6"/><path d="M854 432H906L910 476H886L880 450L874 476H850Z" fill="#14141a"/><path d="M860 362Q838 352 828 328" stroke="#f4f0e6" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M828 328Q812 312 822 298Q836 306 834 328Z" fill="#fff"/></g>
+${cj(896,414,58,56)}<g fill="#120a1f" stroke="#e5a93b" stroke-opacity=".7" stroke-width="1.5"><circle cx="925" cy="378" r="14"/><path d="M906 400Q925 386 944 400L948 416H902Z"/></g>
+${st(60,120,1.4,0)}${st(330,100,1,.7)}${st(640,104,1.2,1.4)}${st(900,130,1.5,.3)}${st(40,380,1,1)}${st(930,300,1,1.8)}${st(470,60,1.1,.5)}</svg>`}
+function home(){const hasBg=!!C.cover&&U(C.cover),nm=(G&&G.name)||(LAST&&LAST.name)||'— — —',pt=G&&G.name?G.score:(LAST?LAST.score:0),top=bs();
+return `<div class=home><div class=bulbs>${'<i></i>'.repeat(26)}</div>${hasBg?`<div class=scene style="background-image:url('${U(C.cover)}')"></div><div class=shade></div>`:`<div class=scene>${scene()}</div>`}
+<div class=mq><div style="display:flex;gap:.8cqw"><button class=hbtn data-act=mutem aria-label="Música">${MUTEM?'🔇':'🎵'}<small>MÚSICA</small></button><button class=hbtn data-act=mutef aria-label="Efectos">${MUTEF?'🔇':'🔔'}<small>EFECTOS</small></button></div><h1>${tw('title',esc(C.texts.title))}</h1><button class=hbtn data-act=menu aria-label="Menú">☰<small>MENÚ</small></button></div>
+<div class=hud><div class=plate><span>🏅 JUGADOR</span><b>${esc(nm)}</b></div><div class=col><div class=plate><span>⭐ PUNTOS</span><b>${String(pt).padStart(5,'0')}</b></div><div class=plate><span>🏆 HI-SCORE</span><b>${top==null?'-----':top}</b></div></div></div>
+<p class=tag2>${tw('welcome',esc(C.texts.welcome),1)}</p>
+<div class=menu-p><button class=gold data-act=go data-v=group>▶ ${tw('start',esc(C.texts.start),1)}</button><button class=pur data-act=hs>🏆 RÉCORDS</button><button class=teal data-act=how>❓ CÓMO JUGAR</button></div>${MNU?menuHTML():''}</div>`}
+/* ---- puntuación ---- */
+const newG=()=>({id:'p'+Date.now().toString(36)+(Math.random()*1e4|0),name:'',g:0,i:0,score:0,st:[0,1,2,3].map(()=>({w:0,l:0,h:0})),msg:null});
+const gain=(g,n=100)=>{G.score+=n;G.st[g-1].w+=n};
+const lose=(g,n=50,h)=>{G.score-=n;G.st[g-1].l+=n;if(h)G.st[g-1].h+=n};
+const maxPts=()=>100*(C.g1.length+C.g2.length+C.g3.length+C.g4.length);
+const blank=(f,a)=>{const i=f.toLowerCase().indexOf(String(a).toLowerCase());return !a||i<0?f:f.slice(0,i)+'_____'+f.slice(i+a.length)};
+const nm=i=>C.g2[i].name||'Cantante '+(i+1);
+/* ---- audio ---- */
+const pl=(m,l='Escuchar',sm)=>m&&U(m)?`<button class="btn play${sm?' sm':''}" data-act=play data-u="${m.id}">▶ ${l}</button>`:`<div class=miss>Falta el audio</div>`;
+/* ---- pantallas de juego ---- */
+const msg=()=>G.msg?`<div class="msg ${G.msg.t}">${tw(G.msg.k,(G.msg.t=='ok'?'🎉 ':'')+G.msg.h)}</div>`:'';
+const hd=c=>`<div class=gmh><span class=gb>🕹 JUEGO ${G.g} DE 4</span><h2>${tw('gname',esc(C.names[G.g-1]))}</h2>${c?`<span class=cnt>${c}</span>`:''}<details class=inst><summary>📋 Instrucciones</summary><div class=itx>${tw('ginst',esc(C.inst[G.g-1]))}</div></details></div>`;
+function topbar(){const inG=['game','t'].includes(view);
+return `<div class=top><button class="btn pb" data-act=home>🏠 PEÑA</button><div class=ttl><b>GRAN PEÑA CRIOLLA</b><small>${esc(G&&G.name||'')}</small></div><div class=tr>${inG?`<span class=sc>🏆 ${G.score}</span>`:''}<button class="btn gh sm" data-act=mutem>${MUTEM?'🔇':'🎵'} MÚSICA: ${MUTEM?'NO':'SÍ'}</button><button class="btn gh sm" data-act=mutef>${MUTEF?'🔇':'🔔'} EFECTOS: ${MUTEF?'NO':'SÍ'}</button><button class="btn mn" data-act=menu>☰ MENÚ</button></div>${MNU?menuHTML():''}</div>`}
+function screen(){
+if(view=='cover')return home();
+if(view=='group')return `<div class="card cover"><div class=vinyl></div><h2>${tw('group',esc(C.texts.group))}</h2><input id=gn placeholder="Tu nombre" maxlength=30 autocomplete=off><p id=ge class=warn></p><button class="btn big" data-act=begin>Comenzar</button></div>`;
+if(view=='hs')return hsScreen();
+if(view=='game')return G.g==2?match():quiz();
+if(view=='t'){const f=C.facts.filter(Boolean),me=C.memes.filter(x=>x.img),F=f.length?f[Math.random()*f.length|0]:'',M=me.length?me[Math.random()*me.length|0]:null;
+return `<div class="card cover"><h1>🎶 ¡Terminaron el Juego ${G.g}! 🎶</h1><div class=vinyl></div>${F?`<h3>¿Sabías que…?</h3><p class=fact>${tw('fact',esc(F))}</p>`:''}${M?`<img src="${U(M.img)}" style="max-width:100%;max-height:40vh;border-radius:12px"><p>${tw('meme',esc(M.text))}</p>`:''}<div class=nxw><button class="btn nxt" data-act=nextg>SIGUIENTE JUEGO →</button></div></div>`}
+if(view=='final'){const mx=maxPts(),p=mx?Math.max(0,Math.round(G.score/mx*100)):0,T=G.st.reduce((a,s)=>({w:a.w+s.w,l:a.l+s.l,h:a.h+s.h}),{w:0,l:0,h:0});
+const m=C.texts.final.replace('{grupo}',G.name).replace('{jugador}',G.name).replace('{puntaje}',G.score).replace('{max}',mx);
+return `<div class="card final"><h1>${tw('title','🎺 '+esc(C.texts.title)+' 🎺')}</h1><p class=fiesta>${G.isRec?'🏅 ¡NUEVO RÉCORD! 🏅':'🎉 ¡FIESTA CRIOLLA! 🎉'}</p><h2 style="color:var(--green)">Jugador/a: ${esc(G.name)}</h2><p class=pr style="color:var(--red)">${tw('final',esc(m))}</p><p style="font-size:2em;margin:6px"><b>${G.score}</b> / ${mx} puntos · <b>${p}%</b></p><table><tr><th>Juego</th><th>Ganados</th><th>Descontados</th><th>De ellos, pistas</th></tr>${G.st.map((s,i)=>`<tr><td>${i+1}. ${esc(C.names[i])}</td><td>+${s.w}</td><td>−${s.l}</td><td>−${s.h}</td></tr>`).join('')}<tr><th>Total</th><th>+${T.w}</th><th>−${T.l}</th><th>−${T.h}</th></tr></table>${net()}<p style="text-align:center"><button class="btn big hsb" data-act=hs>🏆 VER HIGH SCORES</button></p></div>`}}
+function quiz(){const g=G.g,q=G.Q[G.i],x=q.x,L=q.max-q.tries,useO=q.o.length>1&&(g!=4||q.hint),N=G.Q.length;
+const pr=g==1?x.q:(x.q||'Escuchen el audio: ¿qué género musical es?'),note=g==1?String(x.note||'').trim():'',tag=g==1?String(x.tag||'').trim():'';
+const canH=!q.res&&!q.hint&&(g>=3?q.tries<q.max:q.tries==0)&&(g==3?!!x.hint:g==4?x.alts.length>0:false);
+const oc=()=>`<div class="opts col og n${Math.min(q.o.length,7)}">${q.o.map((o,i)=>{const w=q.wrong.includes(norm(o)),c=norm(o)==norm(x.ans),st=q.res&&c?(q.res=='ok'?'ok':'rv'):w?'bad'+(norm(o)==q.last?' new':''):'';return `<button class="btn ${st}" data-act=ans data-v=${i} ${w||q.res?'disabled':''}><i class=ltr>${i+1}</i><span data-tx="g${g}o">${esc(o)}</span>${st?`<b class=mk>${st[0]=='b'?'✖':'✔'}</b>`:''}</button>`}).join('')}</div>`;
+const nb=`<div class=nxw><button class="btn nxt" data-act=next>${G.i<N-1?'SIGUIENTE PREGUNTA':g<4?'CONTINUAR':'VER RESULTADO'} →</button></div>`;
+const cult=`<div class=sab><div class=sh><svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 30 16 16 30 2 16Z" fill="#f4f0e6" stroke="#d91e2a" stroke-width="3"/></svg>DATO CULTURAL DE LA PEÑA</div><p>${tw('g1note',esc(note))}</p></div>`;
+return `<div class=card>${hd((g==4?'Fragmento':'Pregunta')+' '+(G.i+1)+' de '+N)}${tag?`<div class=tag>${tw('g1tag',esc(tag))}</div>`:''}${g==4?`<div class=lyr>${tw('g4q',lyr(x.frag,x.ans))}</div>`:`<h2 class="pr qb">${tw('g'+g+'q',esc(pr))}</h2>`}${g==3?`<div class=aud>${pl(x.audio,'Tocar melodía (audio)')}${q.hint?pl(x.hint,'Escuchar pista'):''}</div>`:''}${msg()}
+${useO?oc():(q.res?'':`<input id=fa placeholder="Escriba aquí la respuesta del grupo" autocomplete=off><button class="btn g" data-act=chk>Comprobar</button>`)}${q.res?'':`<p class=att>Intentos restantes: <b>${L}</b></p>`}
+${note&&q.res?cult:''}${canH?`<button class="btn gh" data-act=hint>💡 Pedir pista (−50 puntos)</button>`:''}${q.res?nb:''}</div>`}
+
+function match(){const M=G.M,n=C.g2.length,dn=Object.keys(M.d).length,all=dn==n;
+const A=M.p.map((si,k)=>{const x=C.g2[si],d=M.d[si];return `<div class="arow ${d=='ok'?'ok':d?'rev':M.a==k?'sel':''}"><b>Audio ${k+1}</b>${pl(x.audio,'Oír',1)}${d?`<span>${d=='ok'?'✅ ':'❌ Era: '}${esc(nm(si))}</span>`:`<button class="btn g sm" data-act=sa data-k=${k}>${M.a==k?'✔ Elegido':'Elegir'}</button><span class=att>Intentos: ${2-(M.t[k]||0)}</span>`}</div>`}).join('');
+const S=C.g2.map((x,i)=>{const d=M.d[i];return `<button class="tile ${d=='ok'?'ok':d?'rev':M.s==i?'sel':''}" data-act=ss data-s=${i} ${d?'disabled':''}>${U(x.photo)?`<img src="${U(x.photo)}" alt="">`:'<div class=ph>Falta la foto</div>'}<h3>${tw('g2name',esc(nm(i)))}</h3><span class=att>${d=='ok'?'✅ Resuelta':d?'Revelada':M.s==i?'✔ Elegida':'Elegir cantante'}</span></button>`}).join('');
+return `<div class=card>${hd('Resueltas '+dn+' de '+n)}${msg()}<div class=m2><div class=acol><h3>🎤 Audios</h3>${A}</div><div><h3>🖼️ Cantantes</h3><div class=grid>${S}</div></div></div>${all?`<div class=nxw><button class="btn nxt" data-act=endg>CONTINUAR →</button></div>`:''}</div>`}
+const lyr=(f,a)=>{f=String(f||'');a=String(a||'');const i=a?f.toLowerCase().indexOf(a.toLowerCase()):-1;return i<0?esc(f):esc(f.slice(0,i))+'<span class=bl>_____</span>'+esc(f.slice(i+a.length))};
+function startGame(g){G.g=g;G.i=0;G.msg=null;view='game';
+if(g==2){G.M={p:shuf(C.g2.map((_,i)=>i)),d:{},t:{},a:null,s:null};if(!C.g2.length)return endGame()}
+else{G.Q=C['g'+g].map(x=>({x,o:shuf([...new Map([x.ans,...x.alts].filter(Boolean).map(o=>[norm(o),o])).values()]),tries:0,max:2,hint:0,res:'',wrong:[]}));if(!G.Q.length)return endGame()}render()}
+function endGame(){G.msg=null;if(G.g<4){view='t';G.burst=2;render();fx('game')}else{finish();view='final';G.burst=2;render();fx(G.isRec?'record':'final')}}
+function answer(v){const q=G.Q[G.i];if(q.res||!String(v).trim())return;const ok=norm(v)==norm(q.x.ans);q.tries++;
+if(ok){gain(G.g);q.res='ok';G.msg=MS('okQ','ok');fx('ok');G.burst=1}
+else{lose(G.g);fx('bad');G.burst=-1;q.wrong.push(norm(v));q.last=norm(v);if(q.tries>=q.max){q.res='fail';G.msg=MS('badQ2','bad',{respuesta:esc(q.x.ans)})}else G.msg=MS('badQ1','bad')}render()}
+function pair(){const M=G.M;if(M.a!=null&&M.s!=null){const k=M.a,s=M.s;M.a=M.s=null;
+if(M.p[k]==s){gain(2);M.d[s]='ok';G.msg=MS('okM','ok',{n:k+1,nombre:esc(nm(s))});fx('ok');G.burst=1}
+else{lose(2);fx('bad');G.burst=-1;M.t[k]=(M.t[k]||0)+1;if(M.t[k]>=2){M.d[M.p[k]]='rev';G.msg=MS('badM2','bad',{n:k+1,nombre:esc(nm(M.p[k]))})}else G.msg=MS('badM1','bad')}}render()}
+/* ---- registro de resultados ---- */
+const RES=()=>{try{return JSON.parse(localStorage.results||'[]')}catch(e){return[]}};
+const ON=()=>((C.online&&C.online.url)||'').trim();
+const web=async(u,o)=>{const ac=new AbortController(),t=setTimeout(()=>ac.abort(),20000);try{const x=await fetch(u,Object.assign({signal:ac.signal},o));return await x.json()}finally{clearTimeout(t)}};
+async function post(r){const j=await web(ON(),{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(r)});if(!j.ok)throw new Error(j.error||'sin confirmación');return j}
+const qs=a=>ON()+(ON().includes('?')?'&':'?')+'action='+a;
+async function getRows(){const j=await web(qs('list'));if(!j.ok||!Array.isArray(j.rows))throw new Error('respuesta no válida');return j.rows}
+const PEND=()=>{try{return JSON.parse(localStorage.pending||'[]')}catch(e){return[]}},setP=L=>{try{localStorage.pending=JSON.stringify(L)}catch(e){}};
+const addP=r=>setP([...PEND().filter(x=>x.id!=r.id),r]),delP=id=>setP(PEND().filter(x=>x.id!=id));
+async function flush(skip){if(!ON())return;for(const r of PEND()){if(r.id==skip)continue;try{await post(r);delP(r.id)}catch(e){break}}}
+let TST='';
+async function ptest(){if(!ON()){TST='Primero pega la dirección del registro en línea.';render();return}TST='Probando…';render();const o=[];let nuevo=false;
+try{const j=await web(qs('ping'));if(!j.ok)throw 0;nuevo=!!j.version;o.push(nuevo?'✅ Lectura: el servicio responde (versión '+j.version+').':'⚠ Lectura: responde, pero es una versión antigua del script. Pega el código nuevo y crea una nueva versión de la implementación.')}catch(e){o.push('❌ Lectura: no responde como se espera. Revisa: implementación «Aplicación web», acceso «Cualquier persona» y URL terminada en /exec.')}
+if(nuevo){try{const j=await post({test:true});o.push(j.test?'✅ Envío: el servicio acepta resultados.':'❌ Envío: respuesta inesperada.')}catch(e){o.push('❌ Envío: falló ('+e.message+').')}
+try{const r=await getRows();o.push('✅ Clasificación: '+r.length+' resultado(s) guardado(s) en la hoja.')}catch(e){o.push('❌ Clasificación: no se pudo leer la hoja.')}}
+TST=o.join('\n');render()}
+function saveLocal(g){try{const L=RES().filter(x=>x.id!=g.rec.id);L.push(g.rec);localStorage.results=JSON.stringify(L);g.loc=RES().some(x=>x.id==g.rec.id)}catch(e){g.loc=false}}
+const ui=g=>{if(G===g&&(view=='final'||view=='hs'))render()};
+async function sync(g){if(!ON()){g.net=g.loc?'localonly':'nolocal';ui(g);return}g.net='sending';ui(g);
+try{await post(g.rec);g.net='online';delP(g.rec.id);flush(g.rec.id);try{g.rank={src:'online',rows:await getRows()}}catch(e){}}catch(e){g.net='onfail';addP(g.rec)}ui(g)}
+function finish(){if(G.fin)return;const g=G;g.fin=1;const mx=maxPts(),prev=[...RES(),...(TOP||[])].map(r=>Number(r.puntaje)).filter(isFinite);g.isRec=g.score>0&&(!prev.length||g.score>Math.max(...prev));LAST={name:g.name,score:g.score};g.rec={id:g.id,participante:norm(g.name).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''),modalidad:'partida completa',juego:'Música Criolla',equipo:g.name,puntaje:g.score,maximo:mx,porcentaje:mx?Math.max(0,Math.round(g.score/mx*100)):0,fecha:new Date().toISOString(),juegos:g.st.map((s,i)=>({juego:C.names[i],ganados:s.w,descontados:s.l,pistas:s.h,neto:s.w-s.l}))};saveLocal(g);return g.sp=sync(g)}
+function net(){const n=G.net,t={sending:'Guardando el resultado…',online:'✅ Resultado registrado correctamente en el registro en línea.',onfail:'⚠ El resultado NO se registró en línea. Quedó guardado en este navegador y se reenviará solo la próxima vez que se abra el juego con conexión. También puede pulsar «Reintentar».',localonly:'Resultado guardado solo en este navegador. El registro en línea no está configurado, así que otros dispositivos no lo verán.',nolocal:'⚠ El resultado NO se pudo guardar. Pulse «Reintentar».'}[n];if(!t)return'';return `<div class="msg ${n=='online'?'ok':n=='sending'||n=='localonly'?'':'bad'}">${t}${n=='onfail'||n=='nolocal'?' <button class="btn sm" data-act=retry>Reintentar</button>':''}</div>`}
+const LIMA=iso=>{try{const p=Object.fromEntries(new Intl.DateTimeFormat('en-CA',{timeZone:'America/Lima',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).formatToParts(new Date(iso)).map(x=>[x.type,x.value]));return{d:p.year+'-'+p.month+'-'+p.day,h:p.hour+':'+p.minute+':'+p.second}}catch(e){return{d:String(iso).slice(0,10),h:''}}};
+const when=r=>r.hora?{d:String(r.fecha).slice(0,10),h:String(r.hora)}:LIMA(r.fecha),wk=r=>{const w=when(r);return w.d+' '+w.h};
+const rankRows=()=>[...new Map([...((G.rank&&G.rank.rows)||RES()),...(G.rec&&['onfail','sending'].includes(G.net)?[G.rec]:[])].map(r=>[String(r.id),r])).values()].sort((a,b)=>b.puntaje-a.puntaje||wk(a).localeCompare(wk(b)));
+function hsRows(){const L=rankRows(),P=L.map((r,i)=>({...r,pos:i+1})),T=P.slice(0,10),me=P.find(r=>r.id==G.id);if(me&&!T.includes(me))T.push(me);
+return T.length?T.map(r=>{const w=when(r);return `<div class="r ${r.id==G.id?'me':''} p${Math.min(r.pos,4)}"><span>${r.pos}.</span><span class=nm>${esc(r.equipo)}</span><span class=d></span><span class="${r.puntaje<0?'neg':''}">${r.puntaje}</span><span class=dt>${esc(w.d)} ${esc(String(w.h).slice(0,5))}</span></div>`}).join(''):'<p class=empty>¡Sé el primero en entrar en la tabla!</p>'}
+function hsScreen(){const st=G.hsst,n=!ON()?'Récords de este navegador. El registro en línea no está configurado, así que no aparecen jugadores de otros dispositivos.':st=='loading'?'Cargando récords en línea…':st=='fail'?'<b>⚠ No se pudieron cargar los resultados en línea.</b> Se muestran solo los de este navegador y la tabla puede estar desactualizada. <button class="btn sm" data-act=hsload>Reintentar carga</button>':'Récords de todos los dispositivos.';
+return `<div class="hs hsx"><h2>HIGH SCORES</h2><p class=sub>TOP 10 · MEJORES PARTIDAS</p>${['onfail','nolocal'].includes(G.net)?net():''}<p class=att>${n}</p><div class=hsw>${hsRows()}</div></div><p style="text-align:center"><button class="btn big hsb" data-act=newg>🎮 NUEVA PARTIDA</button></p>`}
+async function loadHS(g){if(!ON()){g.hsst='local';ui(g);return}g.hsst='loading';ui(g);try{await g.sp}catch(e){}
+try{g.rank={src:'online',rows:await getRows()};g.hsst='ok'}catch(e){g.rank=null;g.hsst='fail'}ui(g)}
+const csv=rows=>'Jugador,Puntaje,Maximo,Porcentaje,Fecha,Id\n'+rows.map(r=>[r.equipo,r.puntaje,r.maximo,r.porcentaje,r.fecha,r.id].map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');
+let ONL=null;
+/* ---- exportación ---- */
+const dl=(b,n)=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=n;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),4e3)};
+const safe=c=>JSON.stringify(c).replace(/</g,'\\u003c'),enc=s=>new TextEncoder().encode(s);
+const shell=cs=>'<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>La Gran Peña Criolla</title><style id="css">'+$('#css').textContent+'</style></head><body><div id="root"></div><script>window.PLAY=true;'+cs+'<\/script><script id="app">'+$('#app').textContent+'<\/script></body></html>';
+let crcT;const crc=u=>{const t=crcT||(crcT=[...Array(256)].map((_,n)=>{let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;return c>>>0}));let r=-1;for(let i=0;i<u.length;i++)r=t[(r^u[i])&255]^(r>>>8);return(r^-1)>>>0};
+function zip(fs){const P=[],D=[];let off=0,cl=0;for(const f of fs){const nm=enc(f.n),c=crc(f.d),h=new DataView(new ArrayBuffer(30));
+h.setUint32(0,0x04034b50,true);h.setUint16(4,20,true);h.setUint16(6,0x800,true);h.setUint32(14,c,true);h.setUint32(18,f.d.length,true);h.setUint32(22,f.d.length,true);h.setUint16(26,nm.length,true);P.push(h.buffer,nm,f.d);
+const e=new DataView(new ArrayBuffer(46));e.setUint32(0,0x02014b50,true);e.setUint16(4,20,true);e.setUint16(6,20,true);e.setUint16(8,0x800,true);e.setUint32(16,c,true);e.setUint32(20,f.d.length,true);e.setUint32(24,f.d.length,true);e.setUint16(28,nm.length,true);e.setUint32(42,off,true);D.push(e.buffer,nm);off+=30+nm.length+f.d.length;cl+=46+nm.length}
+const z=new DataView(new ArrayBuffer(22));z.setUint32(0,0x06054b50,true);z.setUint16(8,fs.length,true);z.setUint16(10,fs.length,true);z.setUint32(12,cl,true);z.setUint32(16,off,true);return new Blob([...P,...D,z.buffer],{type:'application/zip'})}
+function check(){const w=[],m=(c,t)=>c||w.push(t);m(C.cover,'Falta la imagen de portada (recomendada).');
+C.g1.forEach((x,i)=>m(x.q&&x.ans&&x.alts.length,`Juego 1, pregunta ${i+1}: falta pregunta, respuesta o alternativas.`));
+C.g2.forEach((x,i)=>m(x.name&&x.photo&&x.audio,`Juego 2, pareja ${i+1}: falta ${[!x.name&&'nombre',!x.photo&&'foto',!x.audio&&'audio'].filter(Boolean).join(', ')}.`));
+C.g3.forEach((x,i)=>m(x.ans&&x.audio&&x.alts.length,`Juego 3, pregunta ${i+1}: falta género, alternativas o audio principal.`));
+C.g4.forEach((x,i)=>m(x.frag&&x.ans&&x.frag.toLowerCase().includes(x.ans.toLowerCase()),`Juego 4, pregunta ${i+1}: falta fragmento o palabra (debe aparecer dentro del fragmento).`));return w}
+async function exp(kind){const w=check();if(w.length&&!confirm('Faltan elementos:\n\n'+w.join('\n')+'\n\n¿Exportar de todos modos?'))return;
+let sz=0;const own={},c=JSON.parse(JSON.stringify(C)),fs=[];
+for(const m of mediaList(c)){const b=await tx('readonly',s=>s.get(m.id));if(!b)continue;sz+=b.size;
+if(kind=='zip'){if(isFont(m)){let pt='assets/'+String(m.name).replace(/[^A-Za-z0-9._-]/g,'_');if(own[pt]&&own[pt]!=m.id)pt='assets/'+m.id+'_'+String(m.name).replace(/[^A-Za-z0-9._-]/g,'_');own[pt]=m.id;m.path=pt;if(!fs.some(f=>f.n==pt))fs.push({n:pt,d:new Uint8Array(await b.arrayBuffer())})}else{m.path='assets/'+m.id+((m.name.match(/\.\w+$/)||['.bin'])[0]).toLowerCase();if(!fs.some(f=>f.n==m.path))fs.push({n:m.path,d:new Uint8Array(await b.arrayBuffer())})}}
+else m.url=await new Promise(r=>{const f=new FileReader();f.onload=()=>r(f.result);f.readAsDataURL(b)})}
+if(kind=='html'&&sz>15e6&&!confirm('Tus audios e imágenes pesan unos '+Math.round(sz/1e6)+' MB; el archivo único pesará ~'+Math.round(sz*1.37/1e6)+' MB y puede no caber en tu alojamiento. ¿Continuar? (El ZIP pesa menos.)'))return;
+if(kind=='json')dl(new Blob([JSON.stringify(c)],{type:'application/json'}),'configuracion_pena_criolla.json');
+if(kind=='html')dl(new Blob([shell('window.CFG='+safe(c)+';')],{type:'text/html'}),'La_Gran_Pena_Criolla.html');
+if(kind=='zip')dl(zip([{n:'index.html',d:enc(shell(''))},{n:'config.json',d:enc(JSON.stringify(c))},...fs]),'La_Gran_Pena_Criolla_publicar.zip')}
+async function imp(f){if(!f)return;try{const c=JSON.parse(await f.text());for(const k of await tx('readonly',s=>s.getAllKeys()))await tx('readwrite',s=>s.delete(k));
+for(const m of mediaList(c))if(m.url){await tx('readwrite',s=>s.put(null,'_'));const b=await(await fetch(m.url)).blob();await tx('readwrite',s=>s.put(b,m.id));delete m.url}
+C=fixC(c);await loadBlobs();save();render();alert('Configuración importada.')}catch(e){alert('Archivo no válido: '+e.message)}}
+/* ---- administración ---- */
+const fld=(p,l,o={})=>{const v=pget(C,p);return `<label class=f>${l}${o.ta?`<textarea data-p="${p}" ${o.l?'data-l=1':''} rows=${o.ta}>${esc(o.l?(v||[]).join('\n'):v)}</textarea>`:`<input data-p="${p}" ${o.t?'type='+o.t:''} value="${esc(v)}">`}</label>`};
+const mf=(p,l,k)=>{const m=pget(C,p);return `<div class=mf><b>${l}</b>${m?(k=='img'?`<img src="${U(m)}">`:`<audio controls src="${U(m)}"></audio>`)+`<small>${esc(m.name)}</small><br>`:'<div class=miss>Falta este recurso</div>'}<label class="btn sm g">${m?'Reemplazar':'Elegir archivo'}<input type=file hidden accept="${k=='img'?'image/*':'audio/*'}" data-up="${p}" data-k=${k}></label> ${m?`<button class="btn sm gh" data-act=rm data-q="${p}">Quitar</button>`:''}</div>`};
+async function addList(p,fs){const L=pget(C,p);let n=0;for(const f of fs){const id='m'+Date.now().toString(36)+(Math.random()*1e4|0)+(n++);await tx('readwrite',x=>x.put(f,id));URLS[id]=URL.createObjectURL(f);L.push({id,name:f.name,type:f.type})}FLASH='✅ '+fs.length+' audio(s) añadido(s)';save();render()}
+const mlist=(p,l)=>{const L=pget(C,p)||[];return `<div class=mf><b>${l}</b>${L.map((m,i)=>`<div class=row><b>${i+1}.</b><audio controls src="${U(m)}"></audio><small>${esc(m.name)}</small><span><button class="btn sm gh" data-act=mv data-q="${p}" data-i=${i} data-d=-1 aria-label="Subir">↑</button> <button class="btn sm gh" data-act=mv data-q="${p}" data-i=${i} data-d=1 aria-label="Bajar">↓</button> <label class="btn sm g">Reemplazar<input type=file hidden accept="audio/*" data-up="${p}.${i}" data-k=audio></label> <button class="btn sm gh" data-act=lrm data-q="${p}" data-i=${i}>🗑 Eliminar</button></span></div>`).join('')||'<div class=miss>Aún no hay audios</div>'}<label class="btn sm g">＋ Añadir audios<input type=file hidden multiple accept="audio/*" data-addl="${p}"></label></div>`};
+const ctl=(q,i)=>`<span><button class="btn sm gh" data-act=mv data-q=${q} data-i=${i} data-d=-1>↑</button> <button class="btn sm gh" data-act=mv data-q=${q} data-i=${i} data-d=1>↓</button> <button class="btn sm gh" data-act=del data-q=${q} data-i=${i}>🗑 Eliminar</button></span>`;
+const lst=(q,t,body,intro='')=>`${intro}`+C[q].map((x,i)=>`<div class=card><div class=row><b>${t} ${i+1}</b>${ctl(q,i)}</div>${body(x,q+'.'+i)}</div>`).join('')+`<button class="btn g" data-act=add data-q=${q}>＋ Añadir</button>`;
+const gh=g=>`<div class=card><h3>Juego ${g}</h3>${fld('names.'+(g-1),'Título del juego')}${fld('inst.'+(g-1),'Instrucciones para la voluntaria',{ta:3})}<p class=note>Las preguntas de ejemplo son editables: cámbialas o elimínalas. Alternativas: escribe una por línea.</p></div>`;
+const TABS={
+i:()=>`<div class=card><h3>Textos</h3>${fld('texts.title','Título')}${fld('texts.welcome','Texto de bienvenida',{ta:3})}${fld('texts.start','Texto del botón principal de la portada')}${fld('texts.how','Texto de «Cómo jugar» (una instrucción por línea)',{ta:6})}${fld('texts.group','Texto para pedir el nombre del jugador')}${fld('texts.final','Mensaje final (usa {jugador}, {puntaje} y {max})',{ta:3})}</div><div class=card><h3>Colores</h3><div class=grid>${[['red','Rojo criollo'],['green','Verde profundo'],['terra','Terracota'],['cream','Fondo crema']].map(([k,l])=>fld('theme.'+k,l,{t:'color'})).join('')}</div></div><div class=card><h3>Portada</h3>${mf('cover','Imagen de fondo del escenario de la portada (opcional: si la subes, reemplaza la ilustración de la peña; si no, se usa la ilustración)','img')}</div>`,
+d:()=>{const P=C.design.pieces,o=(a,v)=>a.map(([k,l])=>`<option value="${k}" ${v==k?'selected':''}>${l}</option>`).join(''),
+sel=(p,l,a)=>`<label class=f>${l}<select data-p="${p}">${o(a,pget(C,p))}</select></label>`,
+chk=(p,l)=>`<label class=f><input type=checkbox style="width:28px;height:28px" data-p="${p}" ${pget(C,p)?'checked':''}> ${l}</label>`,
+W=[['all','Todas las pantallas'],['cover','Portada y nombre del grupo'],['g1','Juego 1'],['g2','Juego 2'],['g3','Juego 3'],['g4','Juego 4'],['t','Entre juegos'],['final','Pantalla final']];
+return fsCard()+`<div class=card><h3>Estilo de la interfaz</h3>${chk('design.arcade','📺 Efecto de pantalla retro (líneas de monitor antiguo)')}<p class=note>Cambiar el diseño no afecta preguntas, audios, puntajes ni reglas. Para ver el resultado pulsa «▶ Probar el juego».</p>
+<button class="btn gh sm" data-act=rest>↩ Volver al diseño con el que entré a esta pestaña</button> <button class="btn gh sm" data-act=orig>Diseño original (sin imágenes ni arcade)</button></div>
+<div class=card><h3>Imágenes</h3><label class="btn g">＋ Subir imagen<input type=file hidden accept="image/*" data-newp=1></label><p class=note>PNG con fondo transparente es lo mejor. Cada imagen nueva queda como borrador: marca «Aplicar en el juego» cuando te guste.</p></div>`+
+P.map((x,i)=>{const p='design.pieces.'+i;return `<div class=card><div class=row><b>Imagen ${i+1}: ${esc(x.img?.name||'')}</b>${ctl('design.pieces',i)}</div>
+<div class=pv style="background-image:url('${U(x.img)}');background-size:${x.role=='bg'&&x.fit=='cover'?'cover':'contain'};${x.px?'image-rendering:pixelated':''}"></div>
+${sel(p+'.role','Uso',[['bg','Fondo'],['side','Decoración lateral'],['center','Ilustración central'],['frame','Marco (cubre los bordes de la pantalla)']])}
+${sel(p+'.where','Pantalla',W)}
+${x.role=='bg'?sel(p+'.fit','Ajuste',[['cover','Rellenar toda la pantalla (puede recortar bordes)'],['contain','Mostrar completa, sin deformar']]):''}
+${x.role=='side'?sel(p+'.side','Lado',[['left','Izquierda'],['right','Derecha']]):''}
+${x.role=='side'||x.role=='center'?`<label class=f>Tamaño: ${x.size}<input type=range min=5 max=60 value=${x.size} data-p="${p}.size"></label>`:''}
+${chk(p+'.px','Pixel art nítido (no suavizar al agrandar)')}${chk(p+'.on','✅ Aplicar en el juego')}
+<label class="btn sm g">Reemplazar imagen<input type=file hidden accept="image/*" data-up="${p}.img" data-k=img></label></div>`}).join('')},
+ty:()=>{const T=C.typo,NM={t:'Títulos',q:'Preguntas y respuestas',b:'Botones y textos pequeños'},EX={t:'Título de la peña, nombre de cada juego y pantallas de felicitación.',q:'La pregunta, las alternativas y los fragmentos de canción.',b:'Botones, instrucciones, datos culturales, mensajes y etiquetas.'};
+const card=k=>{const x=T[k],fm=x.file;return `<div class=card><h3>${NM[k]}</h3><p class=note>${EX[k]}</p>
+<label class=f>Fuente<select data-ty="${k}.f">${Object.entries(TYN).map(([v,l])=>`<option value="${v}" ${x.f==v?'selected':''}>${l}</option>`).join('')}</select></label>
+${x.f=='custom'?`<div class=mf><b>Archivo de tu fuente (.ttf, .otf, .woff o .woff2)</b>${fm?`<small>${esc(fm.name)}</small><br>`:'<div class=miss>Falta el archivo: mientras tanto se usa la fuente de respaldo</div>'}<label class="btn sm g">${fm?'Reemplazar archivo':'Elegir archivo de fuente'}<input type=file hidden accept=".ttf,.otf,.woff,.woff2" data-up="typo.${k}.file" data-k=font></label> ${fm?`<button class="btn sm gh" data-act=rm data-q="typo.${k}.file">Quitar</button>`:''}
+<label class=f>Fuente de respaldo (se usa si la tuya no carga)<select data-ty="${k}.fb">${Object.entries(TYFN).map(([v,l])=>`<option value="${v}" ${x.fb==v?'selected':''}>${l}</option>`).join('')}</select></label></div>`:'<p class=note>Si el dispositivo no tiene esta fuente, se usa automáticamente la siguiente de su lista de respaldo.</p>'}
+<label class=f>Tamaño de texto: <b id="tyv-${k}-sz">${x.sz}%</b><input type=range min=70 max=150 step=5 value=${x.sz} data-ty="${k}.sz"></label>
+<label class=f>Interlineado: <b id="tyv-${k}-lh">${x.lh?x.lh.toFixed(2):'Automático'}</b><input type=range min=0.9 max=2 step=0.05 value=${x.lh||1.3} data-ty="${k}.lh"></label><button class="btn gh sm" data-act=tylh data-k=${k}>Interlineado automático</button></div>`};
+return `<div class=card><h3>Tipografía</h3><p class=note>Estos controles afectan a todo el juego. Los cambios se ven al instante en la vista previa y se guardan solos. Para ver el resultado real pulsa «▶ Probar el juego». Los tamaños se combinan con los de «Diseño y tamaño de texto».</p></div><div class=tyg><div class=typw><div class=typv><small>VISTA PREVIA EN VIVO</small><div class=pvt>GRAN PEÑA CRIOLLA</div><div class=pvq>¿Qué instrumento de percusión es típico de la música criolla?</div><div class=pva><i>1</i><span>El cajón peruano</span></div><div class=pvb>SIGUIENTE PREGUNTA →</div><div class=pvs>Dato cultural de la peña: texto pequeño de ejemplo para ver el tamaño y el interlineado.</div></div></div><div class=tyc>${TYK.map(card).join('')}<button class="btn gh" data-act=tyreset>↺ Restablecer tipografía</button></div></div>`},
+tx:()=>{const S=TXK[TXSEL]||TXS[0],z=C.tx[S.k]||{},gr=Object.keys(TXG),
+lst=gr.map(g=>`<h4>${esc(TXG[g])}</h4>`+TXS.filter(t=>t.g==g).map(t=>`<button class="btn sm ${t.k==S.k?'':'gh'}" data-act=txsel data-k="${t.k}">${esc(t.l)}${txHas(t.k)?' ●':''}</button>`).join('')).join(''),
+sel=`<select class=txm data-txsel>${gr.map(g=>`<optgroup label="${esc(TXG[g])}">${TXS.filter(t=>t.g==g).map(t=>`<option value="${t.k}" ${t.k==S.k?'selected':''}>${esc(t.l)}${txHas(t.k)?' ●':''}</option>`).join('')}</optgroup>`).join('')}</select>`,
+fo=[['','Como está (tipografía general)'],...Object.entries(TYN).filter(([v])=>v!='def'&&v!='custom'),...TYK.filter(k=>C.typo[k].file).map(k=>['g'+k,'Mi fuente subida ('+TYNM[k]+')'])],
+op=(a,v)=>a.map(([x,l])=>`<option value="${x}" ${(v||'')==x?'selected':''}>${l}</option>`).join(''),
+yn=[['','Como está'],['y','Sí'],['n','No']];
+return `<div class=card><h3>Textos del juego</h3><p class=note>Elige un texto, cámbiale el contenido y el aspecto, y mira la vista previa. Lo que no toques queda como está. «●» marca los textos con aspecto propio. Para ver el resultado real pulsa «▶ Probar el juego».</p></div>
+<div class=txg><div><div class=txl>${lst}</div>${sel}</div><div class=txr>
+<div class=typw><div class=typv><small>VISTA PREVIA EN VIVO</small><div id=txpv>${txPrevHTML(S)}</div></div></div>
+<div class="card txs"><h3>${esc(S.l)}</h3><p class=note>Aparece en: ${esc(S.w)}</p>${S.f()}</div>
+<div class=card><h3>Aspecto</h3>
+<label class=f>Fuente<select data-tx-st=f>${op(fo,z.f)}</select></label>
+<label class=f>Tamaño: <b id=txv-sz>${z.sz?z.sz+'%':'Como está'}</b><input type=range min=50 max=200 step=5 value=${z.sz||100} data-tx-st=sz></label>
+<label class=f>Interlineado: <b id=txv-lh>${z.lh?(+z.lh).toFixed(2):'Como está'}</b><input type=range min=0.9 max=2 step=0.05 value=${z.lh||1.3} data-tx-st=lh></label>
+<div class=txg2><label class=f>Negrita<select data-tx-st=b>${op(yn,z.b)}</select></label><label class=f>Cursiva<select data-tx-st=i>${op(yn,z.i)}</select></label>${S.noal?'':`<label class=f>Alineación<select data-tx-st=al>${op([['','Como está'],['left','Izquierda'],['center','Centrado'],['right','Derecha'],['justify','Justificado']],z.al)}</select></label>`}</div>
+<div class=f>Color: <b id=txv-c>${z.c||'Como está'}</b><br><input type=color style="width:90px;height:48px;padding:2px" value="${z.c||'#ffffff'}" data-tx-st=c> <button class="btn sm gh" data-act=txclr>Quitar color</button></div>
+${S.m?`<label class=f><input type=checkbox style="width:26px;height:26px" data-tx-st=gl ${z.gl?'checked':''}> Seguir la tipografía general de la pestaña «Tipografía» (fuente e interlineado). Sin marcar, el mensaje conserva su aspecto original.</label>`:''}
+<button class="btn" data-act=txreset>↩ Volver al valor general</button>
+<p class=note>${S.m?'«Volver al valor general» devuelve el mensaje a su aspecto original.':'«Volver al valor general» quita el aspecto propio y el texto vuelve a la tipografía general.'} ${S.noal?'':'El justificado se desactiva solo en pantallas muy angostas (menos de 560 px) para evitar huecos grandes entre palabras.'}</p></div></div></div>`},
+r:()=>{const sd=L=>[...L].sort((a,b)=>String(b.fecha).localeCompare(String(a.fecha))),rt=(L,d)=>L.length?`<table><tr><th>Jugador</th><th>Puntaje</th><th>Fecha</th>${d?'<th></th>':''}</tr>${sd(L).map(r=>`<tr><td>${esc(r.equipo)}</td><td><b>${r.puntaje}</b> / ${r.maximo}</td><td>${esc((w=>w.d+' '+w.h)(when(r)))}</td>${d?`<td><button class="btn sm gh" data-act=rdel data-id="${r.id}">🗑</button></td>`:''}</tr>`).join('')}<tr><th>Total</th><th>${L.reduce((a,r)=>a+Number(r.puntaje),0)}</th><th></th>${d?'<th></th>':''}</tr></table>`:'<p>Todavía no hay resultados.</p>';
+return `<div class=card><h3>Registro en línea (todos los jugadores)</h3><p class=note>Sin esto, cada resultado queda solo en la computadora donde se jugó. Pega aquí la dirección de tu registro (pasos en «registro_google_apps_script.js») y vuelve a exportar el ZIP para publicar.</p>${fld('online.url','Dirección del registro en línea')}${ON()&&!/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/.test(ON())?'<p class=warn>⚠ La dirección no parece correcta: debe empezar con https://script.google.com/macros/s/ y terminar en /exec</p>':''}<button class="btn" data-act=ptest>🔌 Probar conexión</button>${TST?`<pre class=note style="white-space:pre-wrap">${esc(TST)}</pre>`:''}${PEND().length?`<p class=warn>Resultados pendientes de enviar: ${PEND().length} <button class="btn sm" data-act=flushnow>Reenviar ahora</button></p>`:''}<button class="btn g" data-act=rfetch>⬇ Cargar resultados de todos los jugadores</button>${ONL?rt(ONL,0):''}</div><div class=card><h3>Resultados guardados en este navegador</h3>${rt(RES(),1)}<button class="btn g" data-act=rcsv>Descargar CSV (Excel)</button> <button class="btn gh" data-act=rjson>Descargar JSON</button> <button class="btn gh" data-act=rall>Borrar todo</button></div>`},
+s:()=>{const s=SN(),FL=[['hint','💡 Uso de una pista'],['game','🏁 Fin de un juego'],['record','🏅 Nuevo récord'],['final','🎉 Pantalla final de la actividad']];
+return `<div class=card><h3>🎵 Música de fondo</h3><p class=note>1) Pulsa «Elegir archivo» y escoge un MP3 o WAV de tu computadora. 2) Escúchalo en el reproductor. 3) Ajusta el volumen y activa la música. Todo se guarda solo. La música empieza cuando la persona pulsa su primer botón (el navegador no permite sonido antes). Al cambiar de pantalla se corta al instante y vuelve a sonar solo en las pantallas que marques abajo. En el juego, los botones MÚSICA y EFECTOS se controlan por separado.</p>${mlist('snd.playlist','Canciones de fondo (sube varias y escucha cada una)')}<label class=f>Orden de reproducción<select data-p="snd.order"><option value="seq" ${s.order!='rand'?'selected':''}>Secuencial</option><option value="rand" ${s.order=='rand'?'selected':''}>Aleatorio (sin repetir la misma seguida)</option></select></label><label class=f><input type=checkbox style="width:28px;height:28px" data-p="snd.musicOn" ${s.musicOn?'checked':''}> Música de fondo activada</label>${rngx('snd.musicVol','Volumen de la música')}</div>
+<div class=card><h3>📺 ¿En qué pantallas suena la música?</h3><p class=note>Marca las pantallas donde quieres que suene. En las demás habrá silencio. Al pasar de una pantalla a otra la música se corta y, si la nueva está marcada, empieza desde el principio.</p>${[['home','Portada (inicio)'],['group','Pantalla del nombre'],['g1','Juego 1: '+esc(C.names[0])],['g2','Juego 2: '+esc(C.names[1])],['g3','Juego 3: '+esc(C.names[2])],['g4','Juego 4: '+esc(C.names[3])],['trans','Pantalla entre juegos'],['final','Resumen final'],['hs','Récords (HIGH SCORES)']].map(([k,l])=>`<label class=f><input type=checkbox style="width:26px;height:26px" data-p="snd.musicScreens.${k}" ${(s.musicScreens||{})[k]?'checked':''}> ${l}</label>`).join('')}</div>
+<div class=card><h3>🔔 Efectos de sonido</h3><p class=note>Asigna un sonido a cada acción (opcional). Suenan de uno en uno y la música baja mientras suenan. Elige sonidos cortos y suaves. Las dos bibliotecas (correcto e incorrecto) suenan en CADENA: en el orden de su lista, del 1 hasta el último, y luego vuelven al 1. Usa ↑ ↓ para cambiar el orden. La cadena sigue avanzando entre preguntas y juegos, y se reinicia al recargar la página. Las palabras «¡WOW!», «¡MUY BIEN!», «¡EXCELENTE!» y «¡BRAVO!» aparecen al acertar, con estrellas y confeti.</p>${rngx('snd.fxVol','Volumen de los efectos')}${mlist('snd.fxOk','✅ Audios de respuesta correcta (suenan en cadena, en este orden)')}${mlist('snd.fxBad','❌ Audios de respuesta incorrecta (suenan en cadena, en este orden)')}<label class=f><input type=checkbox style="width:26px;height:26px" data-p="snd.vfxOk" ${s.vfxOk?'checked':''}> 🎉 Mostrar celebración visual al acertar</label><label class=f><input type=checkbox style="width:26px;height:26px" data-p="snd.vfxBad" ${s.vfxBad?'checked':''}> ✖ Mostrar la gran ✖ roja al equivocarse</label>${FL.map(([k,l])=>mf('snd.fx.'+k,l,'audio')).join('')}</div>`},
+g1:()=>gh(1)+lst('g1','Pregunta',(x,p)=>fld(p+'.tag','Etiqueta amarilla sobre la pregunta (opcional; por ejemplo: CANCIÓN CRIOLLA INMORTAL)')+fld(p+'.q','Pregunta',{ta:2})+fld(p+'.ans','Respuesta correcta')+fld(p+'.alts','Alternativas incorrectas, una por línea (con 4 tendrás 5 alternativas en total)',{ta:4,l:1})+fld(p+'.note','Dato cultural de la peña (opcional: aparece después de responder; déjalo vacío si no tienes un dato verificado)',{ta:3})),
+g2:()=>gh(2)+lst('g2','Pareja',(x,p)=>fld(p+'.name','Nombre de la cantante')+mf(p+'.photo','Fotografía de la cantante','img')+mf(p+'.audio','Audio de su voz (ya queda asociado a esta cantante)','audio')),
+g3:()=>gh(3)+lst('g3','Pregunta',(x,p)=>fld(p+'.q','Texto de la pregunta (opcional)')+fld(p+'.ans','Género correcto')+fld(p+'.alts','Otras alternativas (una por línea)',{ta:3,l:1})+mf(p+'.audio','Audio principal','audio')+mf(p+'.hint','Audio de pista (opcional; si falta, no se ofrece pista)','audio')),
+g4:()=>gh(4)+lst('g4','Pregunta',(x,p)=>fld(p+'.frag','Fragmento (breve y que tengas derecho a usar). Enter = nuevo verso; línea en blanco = nueva estrofa',{ta:6})+'<div class=f>Vista previa</div><div class=lyr>'+lyr(x.frag,x.ans)+'</div>'+fld(p+'.ans','Palabra omitida (debe estar dentro del fragmento)')+fld(p+'.alts','Alternativas de la pista (una por línea; sin ellas no hay pista)',{ta:3,l:1})),
+x:()=>`<div class=card><h3>Tarjetas «¿Sabías que…?»</h3>${fld('facts','Una por línea (se muestran entre juegos)',{ta:6,l:1})}</div><h3>Memes</h3>`+lst('memes','Meme',(x,p)=>fld(p+'.text','Texto del meme')+mf(p+'.img','Imagen','img')),
+p:()=>{const w=check();return `<div class=card><h3>Revisión</h3>${w.length?`<ul class=warn>${w.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:'<p>✅ No falta nada.</p>'}<p>Puntaje máximo actual: <b>${maxPts()}</b></p></div><div class=card><h3>Exportar</h3><p class=note>Guardado automático ≠ publicado. Para actualizar lo que ven las voluntarias, exporta y vuelve a publicar.</p><button class="btn" data-act=exp data-k=zip>📦 Bajar ZIP</button><br><button class="btn g" data-act=exp data-k=html>📄 Archivo único portable (.html)</button><br><button class="btn gh" data-act=exp data-k=json>💾 Copia de seguridad (.json)</button><br><label class="btn gh">⬆ Importar copia (.json)<input type=file hidden accept=".json" data-imp=1></label><p class=note>1. Exporta el ZIP y descomprímelo. 2. Sube index.html, config.json y la carpeta assets a tu repositorio de GitHub (respetando mayúsculas y minúsculas). 3. GitHub Pages se actualiza solo en uno o dos minutos. El Editor no va en lo publicado: el index.html del ZIP es solo el juego. La copia .json guarda todo; consérvala como versión maestra.</p></div>`}};
+const admin=()=>{const T=[['i','Inicio'],['d','Diseño y tamaño de texto'],['ty','Tipografía'],['tx','Textos del juego'],['s','Música y efectos'],['r','Resultados'],['g1','Juego 1'],['g2','Juego 2'],['g3','Juego 3'],['g4','Juego 4'],['x','Datos y memes'],['p','Publicar']];
+return `<div class=top><b>🛠 Administración · La Gran Peña Criolla</b><button class="btn gh sm" data-act=test>▶ Probar el juego</button></div><main><p class=note>Los cambios se guardan solos en este navegador (los archivos grandes ocupan espacio: si el navegador se llena, usa la copia .json).</p>${FLASH?`<p class="msg ok">${esc(FLASH)}</p>`:''}<div class=tabs>${T.map(([k,l])=>`<button class="btn sm ${tab==k?'':'gh'}" data-act=tab data-v=${k}>${l}</button>`).join('')}</div>${TABS[tab]()}</main>`};
+/* ---- eventos ---- */
+const FSK=['title','game','q','opt','note','btn'],fsv=()=>Object.assign({title:100,game:100,q:100,opt:100,note:100,btn:100},(C.design&&C.design.fs)||{});
+/* ---- tipografía global ---- */
+const TYK=['t','q','b'],isFont=m=>/\.(ttf|otf|woff2?)$/i.test((m&&m.name)||'');
+const TY=x=>{const d=DEF().typo;TYK.forEach(k=>{d[k]=Object.assign(d[k],(x&&x[k])||{})});return d};
+const TYL={georgia:'Georgia,"Times New Roman",Times,serif',palatino:'"Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif',times:'"Times New Roman",Times,"Liberation Serif",serif',arial:'Arial,Helvetica,"Liberation Sans",sans-serif',trebuchet:'"Trebuchet MS","Lucida Grande","Segoe UI",Arial,sans-serif',verdana:'Verdana,Geneva,"DejaVu Sans",sans-serif',tahoma:'Tahoma,"Segoe UI",Geneva,sans-serif',system:'system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif',courier:'"Courier New",Courier,"Liberation Mono",monospace',impact:'Impact,"Arial Black","Arial Narrow Bold",sans-serif'};
+const TYN={def:'Predeterminada (la actual)',georgia:'Georgia (con serifa, clásica)',palatino:'Palatino (con serifa, elegante)',times:'Times New Roman (con serifa)',arial:'Arial (sin serifa)',trebuchet:'Trebuchet MS (sin serifa, amable)',verdana:'Verdana (sin serifa, ancha)',tahoma:'Tahoma (sin serifa, compacta)',system:'Fuente del sistema (se adapta al dispositivo)',courier:'Courier New (máquina de escribir)',impact:'Impact (gruesa, de cartel)',custom:'⬆ Subir mi propia fuente…'};
+const TYFB={sans:'system-ui,"Segoe UI",Arial,sans-serif',serif:'Georgia,"Times New Roman",serif',mono:'"Courier New",monospace',display:'Impact,"Arial Black",sans-serif'};
+const TYFN={sans:'Sin serifa (recomendado)',serif:'Con serifa',mono:'Monoespaciada',display:'Gruesa tipo cartel'};
+const TYD={t:'Georgia,serif',q:'"Trebuchet MS","Segoe UI",system-ui,sans-serif',b:'"Trebuchet MS","Segoe UI",system-ui,sans-serif'};
+const LF={};
+function loadFont(m){const u=U(m);if(!u||LF[m.id]===u)return;LF[m.id]=u;try{const ff=new FontFace('PF_'+m.id,'url("'+u+'")');ff.load().then(f=>{document.fonts.add(f)}).catch(()=>{LF[m.id]=null})}catch(e){LF[m.id]=null}}
+function typo(){const T=C.typo,r=document.documentElement.style,cl=document.body.classList;
+TYK.forEach(k=>{const x=T[k];let st=null;
+if(x.f=='custom'){if(x.file&&U(x.file)){loadFont(x.file);st='"PF_'+x.file.id+'",'+(TYFB[x.fb]||TYFB.sans)}}else st=TYL[x.f]||null;
+r.setProperty('--ff-'+k,st||TYD[k]);cl.toggle('tyf-'+k,!!st);
+r.setProperty('--lh-'+k,x.lh||1.3);cl.toggle('tyl-'+k,!!x.lh);r.setProperty('--ty-'+k,x.sz/100)})}
+function tySet(t){const[k,f]=t.dataset.ty.split('.');let v=t.value;if(f=='sz'||f=='lh')v=+v;C.typo[k][f]=v;save();theme();const b=document.getElementById('tyv-'+k+'-'+f);if(b)b.textContent=f=='sz'?v+'%':f=='lh'?v.toFixed(2):v}
+/* ---- textos del juego: aspecto individual ---- */
+let TXSEL='title';
+const tw=(k,h,inl)=>{const z=C.tx&&C.tx[k];return `<span${inl?'':' class=tx'} data-tx="${k}"${z&&z.gl?' data-tg=1':''}>${h}</span>`};
+const MT=(k,v)=>{v=v||{};return esc((C.msgs&&C.msgs[k])||'').replace(/\{(\w+)\}/g,(m,n)=>n=='palabra'?tw('words',esc(WOW()),1):(n in v?v[n]:m))};
+const MS=(k,t,v)=>({t,k,h:MT(k,v)});
+const TXG={a:'Portada y pantallas generales',b:'Títulos e instrucciones de los juegos',c:'Juego 1 · Trivia',d:'Juego 2 · ¿Quién canta?',e:'Juego 3 · Género musical',f:'Juego 4 · Completa la canción',g:'Entre juegos',h:'Mensajes de acierto',i:'Mensajes de error y pista'};
+const TYNM={t:'Títulos',q:'Preguntas y respuestas',b:'Botones y textos pequeños'};
+const TXE='<p class=note>Todavía no hay elementos: añádelos en la pestaña del juego.</p>';
+const lf=(a,f,lab,o)=>()=>C[a].map((x,i)=>fld(a+'.'+i+'.'+f,lab+' '+(i+1),o)).join('')||TXE;
+const ls=(a,f)=>()=>{const x=C[a].find(x=>x&&x[f]);return x?String(x[f]):''};
+const lo=a=>()=>C[a].map((x,i)=>fld(a+'.'+i+'.ans','Pregunta '+(i+1)+': respuesta correcta')+fld(a+'.'+i+'.alts','Pregunta '+(i+1)+': alternativas incorrectas (una por línea)',{ta:3,l:1})).join('')||TXE;
+const lso=a=>()=>{const x=C[a].find(x=>x&&x.ans);return x?String(x.ans):''};
+const one=(k,g,l,w,p,o)=>({k,g,l,w,f:()=>fld(p,'Texto',o),s:()=>String(pget(C,p)||'')});
+const msgS=(k,g,l,w,h,m)=>({k,g,l,w,m,f:()=>fld('msgs.'+k,'Texto del mensaje'+(h?' ('+h+')':''),{ta:2}),s:()=>exm(C.msgs[k])});
+const exm=t=>String(t||'').replace(/\{palabra\}/g,((C.msgs.words||[])[0])||'').replace(/\{n\}/g,'1').replace(/\{nombre\}/g,nm(0)).replace(/\{respuesta\}/g,'El cajón');
+const TXS=[
+one('title','a','Título del juego','Portada y pantalla final','texts.title'),
+{...one('welcome','a','Texto de bienvenida','Portada, bajo el título (máximo 2 líneas)','texts.welcome',{ta:3}),i:1},
+{...one('start','a','Botón principal de la portada','Portada','texts.start'),i:1},
+one('group','a','Pedir el nombre del jugador','Pantalla donde se escribe el nombre','texts.group'),
+one('how','a','Cómo jugar','Ventana «Cómo jugar»','texts.how',{ta:6}),
+one('final','a','Mensaje final','Pantalla final (usa {jugador}, {puntaje} y {max})','texts.final',{ta:3}),
+{k:'gname',g:'b',l:'Títulos de los 4 juegos',w:'Encabezado de cada juego',f:()=>[0,1,2,3].map(i=>fld('names.'+i,'Juego '+(i+1))).join(''),s:()=>C.names[0]},
+{k:'ginst',g:'b',l:'Instrucciones de los 4 juegos',w:'Botón «📋 Instrucciones» de cada juego',f:()=>[0,1,2,3].map(i=>fld('inst.'+i,'Juego '+(i+1),{ta:3})).join(''),s:()=>C.inst[0]},
+{k:'g1q',g:'c',l:'Preguntas',w:'Pregunta de la trivia',f:lf('g1','q','Pregunta',{ta:2}),s:ls('g1','q')},
+{k:'g1o',g:'c',l:'Respuestas y alternativas',w:'Botones de respuesta de la trivia',f:lo('g1'),s:lso('g1')},
+{k:'g1tag',g:'c',l:'Etiqueta amarilla sobre la pregunta',w:'Trivia (opcional)',f:lf('g1','tag','Etiqueta de la pregunta'),s:ls('g1','tag')},
+{k:'g1note',g:'c',l:'Dato cultural de la peña',w:'Trivia, después de responder (opcional)',f:lf('g1','note','Dato cultural de la pregunta',{ta:3}),s:ls('g1','note')},
+{k:'g2name',g:'d',l:'Nombres de las cantantes',w:'Fichas de cantantes y resultado de cada audio',f:lf('g2','name','Cantante'),s:ls('g2','name')},
+{k:'g3q',g:'e',l:'Texto de las preguntas',w:'Pregunta de género musical',f:lf('g3','q','Pregunta',{ta:2}),s:ls('g3','q')},
+{k:'g3o',g:'e',l:'Géneros y alternativas',w:'Botones de respuesta de género musical',f:lo('g3'),s:lso('g3')},
+{k:'g4q',g:'f',l:'Fragmentos de canción',w:'Completa la canción',f:lf('g4','frag','Fragmento',{ta:4}),s:ls('g4','frag')},
+{k:'g4o',g:'f',l:'Palabra y alternativas de la pista',w:'Botones de pista de «Completa la canción»',f:lo('g4'),s:lso('g4')},
+{k:'fact',g:'g',l:'Tarjetas «¿Sabías que…?»',w:'Pantalla entre juegos',f:()=>fld('facts','Una por línea',{ta:6,l:1}),s:()=>C.facts.find(Boolean)||''},
+{k:'meme',g:'g',l:'Texto de los memes',w:'Pantalla entre juegos',f:lf('memes','text','Meme'),s:ls('memes','text')},
+{k:'words',g:'h',l:'Palabras de celebración (¡WOW!, ¡MUY BIEN!…)',w:'Mensaje de acierto: se elige una al azar',m:'ok',noal:1,i:1,f:()=>fld('msgs.words','Una por línea',{ta:5,l:1}),s:()=>(C.msgs.words||[])[0]||''},
+msgS('okQ','h','Acierto en Trivia, Género y Canción','Mensaje verde, incluye «+100 puntos»','{palabra} = palabra de celebración','ok'),
+msgS('okM','h','Acierto en ¿Quién canta?','Mensaje verde, incluye «+100 puntos»','{palabra}, {n} = número de audio, {nombre} = cantante','ok'),
+msgS('badQ1','i','Error (queda 1 intento)','Mensaje rojo «−50 puntos» en Trivia, Género y Canción','','bad'),
+msgS('badQ2','i','Error (sin intentos)','Mensaje rojo «−50 puntos» con la respuesta correcta','{respuesta} = respuesta correcta','bad'),
+msgS('badM1','i','Error en ¿Quién canta? (queda 1 intento)','Mensaje rojo «−50 puntos»','','bad'),
+msgS('badM2','i','Error en ¿Quién canta? (sin intentos)','Mensaje rojo «−50 puntos»','{n} = número de audio, {nombre} = cantante','bad'),
+msgS('hint','i','Pista usada','Mensaje rojo «−50 puntos» al pedir una pista','','bad')];
+const TXK=Object.fromEntries(TXS.map(t=>[t.k,t]));
+const txHas=k=>!!(C.tx[k]&&Object.values(C.tx[k]).some(v=>v!=null));
+const txStack=f=>{if(!f)return null;if(TYL[f])return TYL[f];const m=/^g([tqb])$/.exec(f);if(m){const x=C.typo[m[1]];if(x&&x.file&&U(x.file)){loadFont(x.file);return '"PF_'+x.file.id+'",'+(TYFB[x.fb]||TYFB.sans)}}return null};
+const txDecl=z=>{const a=[],st=txStack(z.f);if(st)a.push('font-family:'+st);if(+z.sz)a.push('font-size:calc(1em*'+(+z.sz/100)+')');if(+z.lh)a.push('line-height:'+(+z.lh));if(z.b)a.push('font-weight:'+(z.b=='y'?'700':'400'));if(z.i)a.push('font-style:'+(z.i=='y'?'italic':'normal'));if(/^#[0-9a-f]{6}$/i.test(z.c||''))a.push('color:'+z.c);return a.join(';')+(a.length?';':'')};
+const txAl=z=>['left','center','right','justify'].includes(z.al)?'text-align:'+z.al+';'+(z.al=='justify'?'hyphens:auto;-webkit-hyphens:auto;text-justify:inter-word;':''):'';
+function txApply(){let e=document.getElementById('txcss');if(!e){e=document.createElement('style');e.id='txcss';document.head.appendChild(e)}
+let o='';for(const[k,z]of Object.entries(C.tx||{})){const S=TXK[k];if(!S||!z)continue;const sel='[data-tx="'+k+'"]',d=txDecl(z);if(d)o+=sel+'{'+d+'}';
+if(z.al&&!S.noal){const a=txAl(z),h=':has(>'+sel+')';if(a){o+=S.i?h+'{'+a+'}':sel+'{'+a+'}';if(z.al=='justify')o+='@media(max-width:560px){'+(S.i?h:sel)+'{text-align:left}}'}}}
+e.textContent=o}
+const txPrevHTML=S=>{const z=C.tx[S.k]||{},d=txDecl(z)+(S.noal?'':txAl(z)),t=String(S.s()||'Texto de ejemplo para ver el aspecto');
+const b=S.k=='words'?'🎉 <span style="'+d+'">'+esc(t)+'</span> +100 puntos':'<span class=pvx style="'+d+'">'+(S.m=='ok'?'🎉 ':'')+esc(t)+'</span>';
+return S.m?`<div class="msg ${S.m}">${b}</div>`:`<div class=pvbox>${b}</div>`};
+const txPrev=()=>{const e=document.getElementById('txpv');if(e)e.innerHTML=txPrevHTML(TXK[TXSEL]||TXS[0])};
+function txSet(t){const pr=t.dataset.txSt,k=TXSEL;let v=t.type=='checkbox'?(t.checked||null):t.value;if(v===''||v===undefined)v=null;else if(pr=='sz'||pr=='lh')v=+v;if(pr=='c'&&!/^#[0-9a-f]{6}$/i.test(v||''))v=null;
+const z=C.tx[k]||(C.tx[k]={});z[pr]=v;if(!Object.values(z).some(x=>x!=null))delete C.tx[k];save();txApply();txPrev();
+const b=document.getElementById('txv-'+pr);if(b)b.textContent=v==null?'Como está':pr=='sz'?v+'%':pr=='lh'?v.toFixed(2):v}
+const theme=()=>{Object.entries(C.theme).forEach(([k,v])=>document.documentElement.style.setProperty('--'+k,v));const f=fsv();const TM={title:'t',game:'t',q:'q',opt:'q',note:'b',btn:'b'};FSK.forEach(k=>document.documentElement.style.setProperty('--s-'+k,f[k]/100*(C.typo[TM[k]].sz/100)));typo();txApply()};
+const rngx=(p,l)=>{const v=pget(C,p);return `<label class=f>${l}: <b>${v}%</b><input type=range min=0 max=100 step=5 value=${v} data-p="${p}"></label>`};
+const FSL=[['title','Título principal (GRAN PEÑA CRIOLLA)'],['game','Título de cada juego'],['q','Preguntas'],['opt','Alternativas'],['note','Datos culturales e instrucciones'],['btn','Textos de los botones']];
+const fsCard=()=>{const f=fsv();return `<div class=card><h3>Tamaño de las letras</h3><p class=note>Mueve cada control: el cambio se ve de inmediato en la vista previa y en el juego, y se guarda solo.</p>${FSL.map(([k,l])=>`<label class=f>${l}: <b id="fsv-${k}">${f[k]}%</b><input type=range min=70 max=150 step=5 value=${f[k]} data-fs="${k}"></label>`).join('')}<div class=fsp><small>Vista previa (textos de ejemplo)</small><div class=pt>GRAN PEÑA CRIOLLA</div><div class=pg>JUEGO 1 DE 4 · TRIVIA</div><div class=pq>Aquí aparece la pregunta.</div><div class=po><span>1 Alternativa uno</span><span>2 Alternativa dos</span><span>3 Alternativa tres</span></div><div class=pn2>Aquí aparece el dato cultural y las instrucciones.</div><span class=pb2>SIGUIENTE PREGUNTA →</span></div><button class="btn g" data-act=savedes>💾 Guardar diseño</button> <button class="btn gh" data-act=fsreset>↺ Restablecer tamaños</button></div>`};
+const skey=()=>view=='game'?'g'+G.g:view=='group'?'cover':view=='hs'?'final':view;
+const dpieces=()=>(C.design.pieces||[]).filter(p=>p.on&&p.img&&U(p.img)&&(p.where=='all'||p.where==skey()));
+const pst=p=>p.px?'image-rendering:pixelated;':'';
+const decor=()=>dpieces().filter(p=>p.role!='center').map(p=>{const u=U(p.img);
+if(p.role=='bg')return `<div class="dz bg" style="background-image:url('${u}');background-size:${p.fit};${pst(p)}"></div>`;
+if(p.role=='frame')return `<div class="dz frame" style="background-image:url('${u}');${pst(p)}"></div>`;
+return `<img class="dz side" alt="" src="${u}" style="${p.side=='right'?'right':'left'}:0;width:${p.size}vw;${pst(p)}">`}).join('');
+const ctr=()=>dpieces().filter(p=>p.role=='center').map(p=>`<img class=ctr alt="" src="${U(p.img)}" style="max-height:${p.size}vh;${pst(p)}">`).join('');
+function render(){theme();const B=G&&G.burst;const SK=view+'|'+(G?G.g+'|'+G.i:'');if(SK!==SCRK){SCRK=SK;if(AU){AU.onended=AU.onpause=null;AU.pause();AU=null;DQ=false}if(FXA){const a=FXA;FXA=null;DF=false;a.onended=a.onpause=a.onerror=null;a.pause()}}const ad=!PLAY&&view=='admin';document.body.classList.toggle('pn',!ad);document.body.classList.toggle('hv',view=='cover'&&!ad);document.body.classList.toggle('crt',!!C.design.arcade&&!ad);document.body.classList.toggle('hsmode',view=='hs'&&!ad);R.innerHTML=ad?admin():decor()+'<div class="cab l"></div><div class="cab r"></div>'+(view=='hs'||view=='cover'?'':topbar())+'<main class="v-'+view+'">'+ctr()+screen()+'</main>'+(!ad&&HOWO?howHTML():'')+(B>0&&SN().vfxOk?confetti(B):'');if(G)G.burst=0;if(B<0&&SN().vfxBad)errX();bgApply();
+if(AU&&!AU.paused)document.querySelectorAll('[data-u]').forEach(b=>{if(b.dataset.u==AU._u)b.textContent='⏸ Pausar'});$('#fa')?.focus();$('#gn')?.focus();if(view=='hs')$('.hsw .me')?.scrollIntoView?.({block:'nearest'})}
+const A={
+go:d=>{view=d.v;render()},adm:()=>{MNU=false;view='admin';render()},home:()=>{if(['game','t'].includes(view)&&!confirm('¿Volver al inicio? Se perderá la partida en curso.'))return;MNU=false;G=newG();view='cover';render()},menu:()=>{MNU=!MNU;render()},mutem:()=>{MUTEM=!MUTEM;try{localStorage.muteM=MUTEM?'1':''}catch(e){}if(MUTEM)auStop();bgApply();render()},mutef:()=>{MUTEF=!MUTEF;try{localStorage.muteF=MUTEF?'1':''}catch(e){}if(FXA)FXA.pause();render()},how:()=>{HOWO=true;MNU=false;render()},howc:()=>{HOWO=false;render()},savedes:()=>{save();FLASH='✅ Diseño guardado.';render()},test:()=>{G=newG();view='cover';render()},tab:d=>{FLASH='';if(d.v=='d'&&tab!='d')DSNAP=JSON.stringify(C.design);tab=d.v;render()},rest:()=>{if(!DSNAP)return;const x=JSON.parse(DSNAP);x.pieces=x.pieces.filter(p=>URLS[p.img?.id]);C.design=x;save();render()},orig:()=>{if(confirm('¿Quitar todas las imágenes de diseño y el estilo arcade?')){C.design={arcade:false,pieces:[],fs:C.design.fs};save();render()}},
+begin:()=>{const v=$('#gn').value.trim();if(!v){$('#ge').textContent='Escribe tu nombre para continuar.';return}G=newG();G.name=v;startGame(1)},
+ans:d=>answer(G.Q[G.i].o[+d.v]),chk:()=>answer($('#fa').value),
+hint:()=>{const q=G.Q[G.i];if(q.hint||q.res||(G.g>=3?q.tries>=q.max:q.tries))return;q.hint=1;if(!q.tries)q.max=1;lose(G.g,50,1);fx('hint');G.msg=MS('hint','bad');render()},
+next:()=>{G.msg=null;if(G.i<G.Q.length-1){G.i++;render()}else endGame()},endg:endGame,
+nextg:()=>G.g<4?startGame(G.g+1):(finish(),view='final',render()),nxt:()=>{G=newG();view='cover';render()},hs:()=>{const g=G;view='hs';render();return loadHS(g)},hsload:()=>loadHS(G),newg:()=>{G=newG();view='group';render()},fsreset:()=>{C.design.fs={title:100,game:100,q:100,opt:100,note:100,btn:100};theme();save();render()},ptest:()=>ptest(),flushnow:async()=>{await flush();render()},retry:()=>{const g=G;if(!g.rec)return;if(!g.loc)saveLocal(g);sync(g)},rfetch:async()=>{if(!ON())return alert('Primero escribe la dirección del registro en línea.');try{ONL=await getRows()}catch(e){alert('No se pudo leer el registro en línea: '+e.message)}render()},rcsv:()=>dl(new Blob(['\ufeff'+csv(ONL||RES())],{type:'text/csv'}),'resultados_pena_criolla.csv'),rjson:()=>dl(new Blob([JSON.stringify(RES(),null,1)],{type:'application/json'}),'resultados_pena_criolla.json'),rdel:d=>{if(confirm('¿Borrar este resultado?')){localStorage.results=JSON.stringify(RES().filter(r=>r.id!=d.id));render()}},rall:()=>{if(confirm('¿Borrar TODOS los resultados guardados en este navegador?')){localStorage.results='[]';render()}},
+sa:d=>{const M=G.M,k=+d.k;if(M.d[M.p[k]])return;M.a=M.a==k?null:k;pair()},
+ss:d=>{const M=G.M,s=+d.s;if(M.d[s])return;M.s=M.s==s?null:s;pair()},
+reset:()=>{if(confirm('¿Empezar una partida nueva desde cero?')){MNU=false;G=newG();view='cover';render()}},
+play:d=>{const b=d,u=URLS[b.u];fxStop();if(AU&&AU._u==b.u&&!AU.paused){AU.pause();render();return}if(AU){AU.onended=AU.onpause=null;AU.pause()}AU=new Audio(u);AU._u=b.u;AU.onplaying=()=>{DQ=true;bgApply()};AU.onended=AU.onpause=()=>{DQ=false;bgApply();render()};AU.play();render()},
+add:d=>{C[d.q].push(NEW[d.q]());save();render()},txsel:d=>{TXSEL=d.k;render()},txreset:()=>{delete C.tx[TXSEL];save();render()},txclr:()=>{const z=C.tx[TXSEL];if(z){z.c=null;if(!Object.values(z).some(x=>x!=null))delete C.tx[TXSEL]}save();render()},tylh:d=>{C.typo[d.k].lh=null;save();render()},tyreset:async()=>{if(!confirm('¿Restablecer la tipografía a los valores originales?'))return;for(const k of TYK)await rmM(C.typo[k].file);C.typo=TY(null);save();render()},
+del:async d=>{if(!confirm('¿Eliminar este elemento?'))return;const L=pget(C,d.q),x=L[+d.i];if(d.q!='design.pieces')for(const v of Object.values(x))if(v&&v.id)await rmM(v);L.splice(+d.i,1);save();render()},
+mv:d=>{const a=pget(C,d.q),i=+d.i,j=i+ +d.d;if(j<0||j>=a.length)return;[a[i],a[j]]=[a[j],a[i]];save();render()},
+rm:async d=>{await rmM(pget(C,d.q));pset(C,d.q,null);FLASH='🗑 Archivo eliminado.';save();render()},exp:d=>exp(d.k),lrm:async d=>{const L=pget(C,d.q);await rmM(L[+d.i]);L.splice(+d.i,1);FLASH='🗑 Audio eliminado.';save();bgApply();render()}};
+document.onclick=e=>{const b=e.target.closest('[data-act]');if(b&&A[b.dataset.act]){if(!SNDOK){SNDOK=true;bgApply()}A[b.dataset.act](b.dataset)}};
+document.onkeydown=e=>{if(e.key=='Enter'){if(e.target.id=='fa')A.chk();if(e.target.id=='gn')A.begin()}};
+document.oninput=e=>{const t=e.target,p=t.dataset&&t.dataset.p;if(t.dataset&&t.dataset.ty&&t.type=='range'){tySet(t);return}if(t.dataset&&t.dataset.txSt){if(t.tagName!='SELECT'&&t.type!='checkbox')txSet(t);return}if(p&&t.closest&&t.closest('.txs')){let v=t.value;if(t.dataset.l)v=v.split('\n').map(x=>x.trim()).filter(Boolean);pset(C,p,v);save();txPrev();return}if(p&&p.startsWith('snd.')&&t.type=='range'){pset(C,p,+t.value);bgApply();save();const b=t.parentNode.querySelector('b');if(b)b.textContent=t.value+'%';return}if(t.dataset&&t.dataset.fs){const k=t.dataset.fs;C.design.fs=Object.assign(fsv(),{[k]:+t.value});theme();save();const b=document.getElementById('fsv-'+k);if(b)b.textContent=t.value+'%';return}if(p&&/^g4\.\d+\.(frag|ans)$/.test(p)){const c=t.closest('.card');c.querySelector('.lyr').innerHTML=lyr(c.querySelector('[data-p$=".frag"]').value,c.querySelector('[data-p$=".ans"]').value)}};
+document.onchange=e=>{const t=e.target,d=t.dataset;if(t.hasAttribute&&t.hasAttribute('data-txsel')){TXSEL=t.value;render();return}if(d.txSt){txSet(t);if(t.tagName=='SELECT'||t.type=='checkbox')render();return}if(d.ty){if(t.type!='range'){tySet(t);render()}return}if(d.up){if(d.k=='font'&&t.files[0])C.typo[d.up.split('.')[1]].f='custom';return up(d.up,d.k,t.files[0])}if(d.addl)return addList(d.addl,[...t.files]);if(d.imp)return imp(t.files[0]);if(d.newp){if(!t.files[0])return;C.design.pieces.push({img:null,on:false,role:'bg',where:'cover',fit:'cover',px:false,size:15,side:'left'});return up('design.pieces.'+(C.design.pieces.length-1)+'.img','img',t.files[0])}
+if(d.p){let v=t.type=='checkbox'?t.checked:t.type=='range'?+t.value:t.value;if(d.l)v=v.split('\n').map(s=>s.trim()).filter(Boolean);pset(C,d.p,v);save();theme();if(d.p.startsWith('design'))render();if(d.p.startsWith('snd'))bgApply()}};
+(async()=>{try{if(PLAY){C=fixC(window.CFG||await(await fetch('config.json')).json());mediaList(C).forEach(m=>URLS[m.id]=m.url||m.path)}
+else{try{C=fixC(JSON.parse(localStorage.cfg))}catch(e){C=DEF()}await loadBlobs()}}
+catch(e){R.innerHTML='<main><div class=card><h2>No se pudo cargar</h2><p>Abra esta página desde su enlace web publicado, o use el archivo La_Gran_Pena_Criolla.html.</p></div></main>';return}
+G=newG();view=PLAY?'cover':'admin';render();if(ON()){flush();getRows().then(r=>{TOP=r;if(view=='cover')render()}).catch(()=>{})}if(typeof addEventListener=='function')addEventListener('online',()=>flush())})();
+</script></body></html>
